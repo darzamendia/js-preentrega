@@ -82,3 +82,15 @@ function mostrarResultado() {
         `Precio unitario ingresado: $${importe}\n- El importe final a pagar es de $${importeTotal}.\n- El pago se realizará en ${cantidadCuotas} cuotas de $${importeCuota}.\n- El interes es de $${importeInteres} `
     );
 }
+
+////////////////////////////////////////////////////////////////////////
+
+function showList(list) {
+    if (list.length > 0) {
+        for (const item of list) {
+            console.log(item.name);
+        }
+    } else {
+        console.log(`La lista no contiene elementos`);
+    }
+}
