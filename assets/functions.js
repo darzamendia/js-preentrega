@@ -85,6 +85,10 @@ function mostrarResultado() {
 
 ////////////////////////////////////////////////////////////////////////
 
+function menu(){
+    prompt(`Seleccione una opción`);
+}
+
 function showList(list) {
     if (list.length > 0) {
         for (const item of list) {

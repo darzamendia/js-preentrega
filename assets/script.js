@@ -8,8 +8,8 @@
 //    }
 //    reEjecutar = consultarReejecucion();
 //    console.log(reEjecutar);
+menu();
 //}
 
-showList(items);
-showList(itemList);
-showList(listaCarrito);
+//showList(items);
+//showList(listaCarrito);
