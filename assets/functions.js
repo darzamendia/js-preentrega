@@ -9,7 +9,6 @@ function consultarReejecucion() {
 }
 
 function ingresoImporte() {
-    let userInput;
     ingreso = parseFloat(prompt(`Ingrese el importe del producto:`));
     while (isNaN(ingreso)) {
         ingreso = parseFloat(
@@ -24,13 +23,9 @@ function ingresoImporte() {
 function ingresoCuotas() {
     let ingreso;
     ingreso = parseInt(
-        prompt(`Ingrese una opcion de pago: 
-- [1] - Un pago 
-- [3] - 3 cuotas (Interes ${interesTresCuotas}%)
-- [6] - 6 cuotas (Interes ${interesSeisCuotas}%)
-- [10] - 10 cuotas (Interes ${interesDiezCuotas}%)
-- [12] - 12 cuotas (Interes ${interesDoceCuotas}%)
-- [0] - Cancelar proceso`)
+        prompt(
+            `Ingrese una opcion de pago:\n- [1] - Un pago\n- [3] - 3 cuotas (Interes ${interesTresCuotas}%)/\n- [6] - 6 cuotas (Interes ${interesSeisCuotas}%)\n- [10] - 10 cuotas (Interes ${interesDiezCuotas}%)\n- [12] - 12 cuotas (Interes ${interesDoceCuotas}%)\n- [0] - Cancelar proceso`
+        )
     );
     while (
         ingreso != 0 &&
@@ -41,14 +36,9 @@ function ingresoCuotas() {
         ingreso != 12
     ) {
         ingreso = parseInt(
-        prompt(`El dato ingresado es erroneo!
-Ingrese una opcion de pago:
-- [1] - Un pago 
-- [3] - 3 cuotas (Interes ${interesTresCuotas}%)
-- [6] - 6 cuotas (Interes ${interesSeisCuotas}%)
-- [10] - 10 cuotas (Interes ${interesDiezCuotas}%)
-- [12] - 12 cuotas (Interes ${interesDoceCuotas}%)
-- [0] - Cancelar proceso`)
+            prompt(
+                `El dato ingresado es erroneo!\nIngrese una opcion de pago:\n- [1] - Un pago \n- [3] - 3 cuotas (Interes ${interesTresCuotas}%)\n- [6] - 6 cuotas (Interes ${interesSeisCuotas}%)\n- [10] - 10 cuotas (Interes ${interesDiezCuotas}%)\n- [12] - 12 cuotas (Interes ${interesDoceCuotas}%)\n- [0] - Cancelar proceso`
+            )
         );
     }
     return ingreso;
@@ -76,11 +66,19 @@ function calcularImportes() {
     importeInteres = parseFloat((importe * porcentaje) / 100);
     importeTotal = importe + importeInteres;
     importeCuota = importeTotal / cantidadCuotas;
+
+    importe = decimalsTwo(importe);
+    importeTotal = decimalsTwo(importeTotal);
+    importeCuota = decimalsTwo(importeCuota);
+    importeInteres = decimalsTwo(importeInteres);
+}
+
+function decimalsTwo(input) {
+    return input.toFixed(2);
 }
 
 function mostrarResultado() {
-    alert(`Precio unitario ingresado: $${importe.toFixed(2)}
-- El importe final a pagar es de $${importeTotal.toFixed(2)}.
-- El pago se realizará en ${cantidadCuotas} cuotas de $${importeCuota.toFixed(2)}.
-- El interes es de $${importeInteres.toFixed(2)} `);
+    alert(
+        `Precio unitario ingresado: $${importe}\n- El importe final a pagar es de $${importeTotal}.\n- El pago se realizará en ${cantidadCuotas} cuotas de $${importeCuota}.\n- El interes es de $${importeInteres} `
+    );
 }
