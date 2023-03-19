@@ -16,13 +16,28 @@ const item03 = { id: 3, name: "Mogul 03", price: 300 };
 const item04 = { id: 4, name: "Mogul 04", price: 400 };
 const item05 = { id: 5, name: "Mogul 05", price: 500 };
 
+////////////////////////////////////////////////////////////////////////
+
+// class Proceso {
+//     constructor(id, title) {
+//         this.id = parseInt(id);
+//         this.title = title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
+//     }
+// }
+
+// const menuProcess01 = new Proceso(1, "agregar proceso 01");
+// const menuProcess02 = new Proceso(2, "agregar proceso 02");
+// const menuProcess03 = new Proceso(3, "agregar proceso 03");
+// const menuProcess04 = new Proceso(4, "agregar proceso 04");
+
 const items = [item01, item02, item03, item04, item05];
 const listaCarrito = [];
+const menuList = [];
 
-class menuOptions {
-    constructor(id, desc) {
-        this.id = id;
-        this.desc = desc;
+class menuOption {
+    constructor(id, title) {
+        this.id = parseInt(id);
+        this.title = `[${this.id}] -` + title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
     }
 }
 
@@ -42,7 +57,15 @@ class cartList {
         this.quantity = parseInt(quantity);
         this.total_price = parseFloat(total_price);
     }
-    totalCartItem(){
+    totalCartItem() {
         this.total_price = this.unit_price * this.quantity;
     }
 }
+
+// Se crea una nueva clase
+menuList.push(new menuOption(1, "Agregar item"));
+menuList.push(new menuOption(2, "Descartar item"));
+menuList.push(new menuOption(3, "visualizar carrito"));
+menuList.push(new menuOption(0, "salir"));
+
+const menuOption05 = new menuOption(1, "Título 05");

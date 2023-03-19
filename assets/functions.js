@@ -11,11 +11,7 @@ function consultarReejecucion() {
 function ingresoImporte() {
     ingreso = parseFloat(prompt(`Ingrese el importe del producto:`));
     while (isNaN(ingreso)) {
-        ingreso = parseFloat(
-            prompt(
-                "El dato ingresado es incorrecto. Ingrese el importe del producto."
-            )
-        );
+        ingreso = parseFloat(prompt("El dato ingresado es incorrecto. Ingrese el importe del producto."));
     }
     return ingreso;
 }
@@ -27,14 +23,7 @@ function ingresoCuotas() {
             `Ingrese una opcion de pago:\n- [1] - Un pago\n- [3] - 3 cuotas (Interes ${interesTresCuotas}%)/\n- [6] - 6 cuotas (Interes ${interesSeisCuotas}%)\n- [10] - 10 cuotas (Interes ${interesDiezCuotas}%)\n- [12] - 12 cuotas (Interes ${interesDoceCuotas}%)\n- [0] - Cancelar proceso`
         )
     );
-    while (
-        ingreso != 0 &&
-        ingreso != 1 &&
-        ingreso != 3 &&
-        ingreso != 6 &&
-        ingreso != 10 &&
-        ingreso != 12
-    ) {
+    while (ingreso != 0 && ingreso != 1 && ingreso != 3 && ingreso != 6 && ingreso != 10 && ingreso != 12) {
         ingreso = parseInt(
             prompt(
                 `El dato ingresado es erroneo!\nIngrese una opcion de pago:\n- [1] - Un pago \n- [3] - 3 cuotas (Interes ${interesTresCuotas}%)\n- [6] - 6 cuotas (Interes ${interesSeisCuotas}%)\n- [10] - 10 cuotas (Interes ${interesDiezCuotas}%)\n- [12] - 12 cuotas (Interes ${interesDoceCuotas}%)\n- [0] - Cancelar proceso`
@@ -85,11 +74,64 @@ function mostrarResultado() {
 
 ////////////////////////////////////////////////////////////////////////
 
-function menu(){
-    prompt(`Seleccione una opción`);
+let found = false;
+
+function menu() {
+    let text = "Seleccione una opción";
+    for (const option of menuList) {
+        text = text + `\n${option.title}`;
+    }
+    return userInput(text);
+}
+
+function userInput(menuText) {
+    let userInput;
+    while (!found) {
+        userInput = prompt(`${menuText}`);
+        valInput(userInput);
+    }
+    return userInput;
+}
+
+function valInput(ingreso) {
+    for (const option of menuList) {
+        found = checkProcess(ingreso, option);
+        if (found) {
+            break;
+        }
+    }
+}
+
+function checkProcess(userInput, option) {
+    for (const prop in option) {
+        if (option[prop] == userInput) {
+            return true;
+        }
+    }
+}
+
+function execute(option) {
+    // console.log(option);
+    // showList(listaCarrito);
+    switch (option) {
+        case 1:
+            console.log();
+            break;
+        case 2:
+            console.log();
+            break;
+        case "3":
+            showList(listaCarrito);
+            break;
+        case 1:
+            console.log();
+            break;
+    }
+    // console.log(option);
 }
 
 function showList(list) {
+    // console.log(list);
     if (list.length > 0) {
         for (const item of list) {
             console.log(item.name);

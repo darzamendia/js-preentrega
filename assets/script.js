@@ -8,7 +8,11 @@
 //    }
 //    reEjecutar = consultarReejecucion();
 //    console.log(reEjecutar);
-menu();
+optionSelected = menu();
+
+execute(optionSelected);
+
+// alert(optionSelected);
 //}
 
 //showList(items);
