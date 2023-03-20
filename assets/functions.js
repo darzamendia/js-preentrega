@@ -112,8 +112,9 @@ function checkProcess(userInput, option) {
 
 function execute(option) {
     switch (option) {
-        case 1:
-            console.log();
+        case "1":
+            console.log(option);
+            addItem();
             break;
         case 2:
             console.log();
@@ -125,6 +126,35 @@ function execute(option) {
             console.log();
             break;
     }
+}
+
+function addItem() {
+    let newId = inputId();
+    let newName = inputName();
+    let newPrice = inputPrice();
+    const item01 = { id: inputId, name: inputName, price: inputPrice };
+    console.log(item01);
+}
+
+function inputId() {
+    ingreso = parseInt(prompt(`Ingrese el ID del producto:`));
+    while (isNaN(ingreso)) {
+        ingreso = parseInt(prompt("El dato ingresado es incorrecto. Ingrese el ID del producto:"));
+    }
+    return ingreso;
+}
+
+function inputName() {
+    ingreso = prompt(`Ingrese el nombre del producto`);
+    return ingreso;
+}
+
+function inputPrice() {
+    ingreso = parseFloat(prompt(`Ingrese el ID del producto:`));
+    while (isNaN(ingreso)) {
+        ingreso = parseFloat(prompt("El dato ingresado es incorrecto. Ingrese el ID del producto:"));
+    }
+    return ingreso;
 }
 
 function showList(list) {
