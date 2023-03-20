@@ -132,7 +132,7 @@ function addItem() {
     let newId = inputId();
     let newName = inputName();
     let newPrice = inputPrice();
-    const item01 = { id: inputId, name: inputName, price: inputPrice };
+    const item01 = { id: newId, name: newName, price: newPrice };
     console.log(item01);
 }
 
