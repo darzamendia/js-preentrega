@@ -87,7 +87,7 @@ function menu() {
 function userInput(menuText) {
     let userInput;
     while (!found) {
-        userInput = prompt(`${menuText}`);
+        userInput = parseInt(prompt(`${menuText}`));
         valInput(userInput);
     }
     return userInput;
@@ -112,14 +112,14 @@ function checkProcess(userInput, option) {
 
 function execute(option) {
     switch (option) {
-        case "1":
+        case 1:
             console.log(option);
             addItem();
             break;
         case 2:
             console.log();
             break;
-        case "3":
+        case 3:
             showList(listaCarrito);
             break;
         case 1:
@@ -133,6 +133,10 @@ function addItem() {
     let newName = inputName();
     let newPrice = inputPrice();
     const item01 = { id: newId, name: newName, price: newPrice };
+
+    alert(`El item se ha agregado exitosamente`);
+    
+    // Purgar una vez finalizada las pruebas
     console.log(item01);
 }
 
