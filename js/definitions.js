@@ -1,28 +1,17 @@
-// let importe = 0;
-// let importeInteres = 0;
-// let importeCuota = 0;
-// let importeTotal = 0;
-// let cantidadCuotas = 0;
-// let reEjecutar = "S";
-
-// const interesTresCuotas = 10.1;
-// const interesSeisCuotas = 20.78;
-// const interesDiezCuotas = 26.69;
-// const interesDoceCuotas = 45.06;
-
-////////////////////////////////////////////////////////////////////////
-
 const itemList = [];
-const cartList = [];
+let cartList = [];
 const menuList = [];
 const cuotas = [];
+const yesNo = ["S", "N"];
 
-emptyCart = `El carrito está vacío`;
+let emptyCart = `El carrito está vacío`;
+let found = false;
+let optionSelected;
 
 class menuOption {
     constructor(id, title) {
         this.id = parseInt(id);
-        this.title = `[${this.id}] -` + title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
+        this.title = `${this.id} - ` + title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
     }
 }
 
@@ -44,28 +33,27 @@ class newCartList {
     }
     totalItem() {
         this.totalPrice = this.unitPrice * this.quantity;
+        console.log(this.totalPrice);
     }
 }
 
 class newCuota {
-    constructor(cuota, interes) {
-        this.cuota = parseInt(cuota);
-        this.interes = parseFloat(interes);
+    constructor(id, percent) {
+        this.id = parseInt(id);
+        this.percent = parseFloat(percent);
     }
 }
 
-// Se crea una nueva clase
 menuList.push(new menuOption(1, "Agregar item"));
-menuList.push(new menuOption(2, "Descartar item"));
-menuList.push(new menuOption(3, "visualizar carrito"));
-menuList.push(new menuOption(4, "Realizar compra"));
+menuList.push(new menuOption(2, "visualizar carrito"));
+menuList.push(new menuOption(3, "Realizar compra"));
 menuList.push(new menuOption(0, "salir"));
 
-itemList.push(new newItemList(1, "Switches SP Meteor Whiites", 2588.89));
-itemList.push(new newItemList(2, "Switches Gateron Oil King", 3344.44));
-itemList.push(new newItemList(3, "Switches JWK T1", 1640.74));
-itemList.push(new newItemList(4, "Switches Gateron CJ", 1829.93));
-itemList.push(new newItemList(5, "Stitches Akko CS Lavender Purple", 1392.59));
+itemList.push(new newItemList(1, "SP Meteor Whiites", 2588.89));
+itemList.push(new newItemList(2, "Gateron Oil King", 3344.44));
+itemList.push(new newItemList(3, "JWK T1", 1640.74));
+itemList.push(new newItemList(4, "Gateron CJ", 1829.93));
+itemList.push(new newItemList(5, "Akko CS Lavender Purple", 1392.59));
 
 cuotas.push(new newCuota(1, 0));
 cuotas.push(new newCuota(3, 10.1));

@@ -1,19 +1,20 @@
 # Bienvenido a mi proyecto para el curso JavaScript de CoderHouse 💻
 
-En esta oportunidad, la preentrega1 contiene:
+En esta oportunidad, la preentrega2 contiene:
 
-- Manejo de variables
-- Funciones
-- Condicionales
-- Ciclos de repetición
-
+-   Manejo de variables
+-   Condicionales
+-   Ciclos de repetición
+-   Funciones
+-   Objetos
 
 ## Archivos .js 💫
 
-El código fue dividido en dos archivos
+El código fue dividido en tres archivos
 
--   `functions.js`
--   `script.js`
+-   `./js/definitions.js`
+-   `./js/functions.js`
+-   `./js/script.js`
 
 ## Entrega 👨‍💻
 
