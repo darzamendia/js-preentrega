@@ -5,15 +5,146 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    </body>
     <script defer src="./js/definitions.js"></script>
-    <script defer src="./js/functions.js"></script>
-    <script defer src="./js/script.js"></script>
-    <title>Pre-entrega 2</title>
+    <!-- <script defer src="./js/functions.js"></script> -->
+    <!-- <script defer src="./js/script.js"></script> -->
+    <script defer src="./js/auxlab.js"></script>
+    <title>Keeb me! (Pre-entrega 3)</title>
 
 </head>
 
-<body>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="./img/kblogo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                Keeb me!
+            </a>
+            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a id="btnHome" class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="btnTienda" class="nav-link" href="#">Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="btnCarrito" class="nav-link" href="#">Carrito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="btnNosotros" class="nav-link" href="#">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="btnContacto" class="nav-link" href="#">Contactos</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button id="btnSearch" class="btn btn-outline-light" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="container">
+
+            <div class="py-5 text-center">
+                <img class="d-block mx-auto mb-4 mainLogo" src="./img/kblogo.svg" alt="Keyboard Logo">
+                <h1>Keeb me!</h1>
+                <p class="lead">(Pre-entrega 3 - Coderhouse - JavaScript)</p>
+            </div>
+            <h1 id="mainTitle">Hello, world!</h1>
+
+            <div class="radios">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="radioBaseColor"
+                        value="Base color" checked>
+                    <label class="form-check-label" for="radioBaseColor">
+                        Base logo
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="radioCreamyBlot"
+                        value="Creamy-Blot">
+                    <label class="form-check-label" for="radioCreamyBlot">
+                        Creamy Blot
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="col-sm-6">
+                <label for="firstName" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                <div class="invalid-feedback">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="lastName" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+                <div class="invalid-feedback">
+                </div>
+            </div>
+            test
+            <!-- Content here -->
+
+            <div id="table">
+                <p id="parrafo">
+                    Prueba de parrafo para table
+                </p>
+            </div>
+
+            <ul>
+                <li class="switches">SP Meteor Whites</li>
+                <li class="switches">Gateron Oil King</li>
+                <li class="switches">JWK T1</li>
+                <li class="switches">Gateron CJ</li>
+            </ul>
+
+            <div>
+                <p>Parrafo 1</p>
+                <p>Parrafo 2</p>
+            </div>
+
+            <div id="contenedor">
+                <p>Contenedor 01</p>
+                <p>Contenedor 02</p>
+                <p>Contenedor 03</p>
+                <p>Contenedor 04</p>
+                <p>Contenedor 05</p>
+                <p>Contenedor 06</p>
+            </div>
+
+            <div id="contenedor2"></div>
+            <ul id="switchList"></ul>
+            <ul id="switchListDos"></ul>
+
+
+            <div id="contenedor3">
+                <p>Contenedor 01</p>
+                <p>Contenedor 02</p>
+                <p>Contenedor 03</p>
+                <p>Contenedor 04</p>
+                <p>Contenedor 05</p>
+                <p>Contenedor 06</p>
+            </div>
+
+    </main>
+    </div>
 
 </body>
 

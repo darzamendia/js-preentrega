@@ -3,4 +3,4 @@ while (optionSelected != 0) {
     execute(optionSelected);
 }
 
-alert(`Fin del programa`);
+alert("Fin del programa");
