@@ -1,3 +1,4 @@
+const logos = [];
 const itemList = [];
 let cartList = [];
 const menuList = [];
@@ -44,6 +45,14 @@ class NewCuota {
     }
 }
 
+class NewLogo {
+    constructor(id, name, url) {
+        this.id = parseInt(id);
+        this.name = name;
+        this.url = url;
+    }
+}
+
 menuList.push(new MenuOption(1, "Agregar item"));
 menuList.push(new MenuOption(2, "visualizar carrito"));
 menuList.push(new MenuOption(3, "Realizar compra"));
@@ -60,3 +69,6 @@ cuotas.push(new NewCuota(3, 10.1));
 cuotas.push(new NewCuota(6, 20.78));
 cuotas.push(new NewCuota(10, 26.69));
 cuotas.push(new NewCuota(12, 45.06));
+
+logos.push(new NewLogo(1, "Base", "./img/kblogo.svg"));
+logos.push(new NewLogo(2, "Creamy-blot", "./img/kblogo-creamy-blot.svg"));

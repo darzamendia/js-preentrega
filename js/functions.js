@@ -173,3 +173,7 @@ function reExecute() {
         optionSelected = 0;
     }
 }
+
+function changeLogoColor(element, source) {
+    element.src = source;
+}

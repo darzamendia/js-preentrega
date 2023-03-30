@@ -13,7 +13,7 @@
         crossorigin="anonymous"></script>
     </body>
     <script defer src="./js/definitions.js"></script>
-    <!-- <script defer src="./js/functions.js"></script> -->
+    <script defer src="./js/functions.js"></script>
     <!-- <script defer src="./js/script.js"></script> -->
     <script defer src="./js/auxlab.js"></script>
     <title>Keeb me! (Pre-entrega 3)</title>
@@ -24,7 +24,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="./img/kblogo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                <img src="./img/kblogo.svg" alt="Logo" width="30" height="24" id="navLogo"
+                    class="d-inline-block align-text-top">
                 Keeb me!
             </a>
             <!-- <a class="navbar-brand" href="#">Navbar</a> -->
@@ -62,7 +63,7 @@
         <div class="container">
 
             <div class="py-5 text-center">
-                <img class="d-block mx-auto mb-4 mainLogo" src="./img/kblogo.svg" alt="Keyboard Logo">
+                <img class="d-block mx-auto mb-4 mainLogo" src="./img/kblogo.svg" alt="Keyboard Logo" id="mainLogo">
                 <h1>Keeb me!</h1>
                 <p class="lead">(Pre-entrega 3 - Coderhouse - JavaScript)</p>
             </div>
@@ -70,21 +71,20 @@
 
             <div class="radios">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="radioBaseColor"
-                        value="Base color" checked>
+                    <input class="form-check-input radioColor" type="radio" name="flexRadioDefault" id="radioBaseColor"
+                        value="Base" checked>
                     <label class="form-check-label" for="radioBaseColor">
                         Base logo
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="radioCreamyBlot"
-                        value="Creamy-Blot">
+                    <input class="form-check-input radioColor" type="radio" name="flexRadioDefault" id="radioCreamyBlot"
+                        value="Creamy-blot">
                     <label class="form-check-label" for="radioCreamyBlot">
                         Creamy Blot
                     </label>
                 </div>
             </div>
-
 
             <div class="col-sm-6">
                 <label for="firstName" class="form-label">Nombre</label>
@@ -99,6 +99,15 @@
                 <div class="invalid-feedback">
                 </div>
             </div>
+
+            <div class="col-sm-6">
+                <label for="inputPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="inputPassword" placeholder="" value="" required="">
+                <div class="invalid-feedback">
+                </div>
+            </div>
+
+
             test
             <!-- Content here -->
 
@@ -132,7 +141,6 @@
             <div id="contenedor2"></div>
             <ul id="switchList"></ul>
             <ul id="switchListDos"></ul>
-
 
             <div id="contenedor3">
                 <p>Contenedor 01</p>

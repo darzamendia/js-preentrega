@@ -97,11 +97,84 @@ function search() {
 btnSearch.addEventListener("click", search);
 btnTienda.addEventListener("click", tienda);
 
+// for (const radio of radios) {
+//     radio.addEventListener("click", () => {
+//         console.log(`Radio seleccionado: ${radio.value}`);
+//     });
+// }
+
 let radios = document.querySelectorAll('input[type="radio"]');
 console.log(radios);
 
-for (const radio of radios) {
-    radio.addEventListener("click", () => {
-        console.log(`Radio seleccionado: ${radio.value}`);
+let radioColor = document.getElementsByClassName("radioColor");
+console.log(radioColor);
+
+let mainLogo = document.getElementById("mainLogo");
+let navLogo = document.getElementById("navLogo");
+
+for (const radioTest of radioColor) {
+    radioTest.addEventListener("click", () => {
+        let logoName = radioTest.value;
+        let logoSel = logos.find((logo) => logo.name == logoName);
+        changeLogoColor(mainLogo, logoSel.url);
+        changeLogoColor(navLogo, logoSel.url);
     });
 }
+
+// radios.forEach((item) => {
+//     //     item.addEventListener("click", () => {
+//     //         let logoName = item.value;
+//     //         let logoSel = logos.find((logo) => logo.name == logoName);
+//     //         changeLogoColor(mainLogo, logoSel.url);
+//     //         changeLogoColor(navLogo, logoSel.url);
+//     //     });
+//     console.log(item);
+// });
+
+let password = document.getElementById("inputPassword");
+
+password.onchange = () => {
+    console.log(password.value);
+};
+
+// password.addEventListener("keypress", (evento) => {
+//     console.log(evento.code);
+// });
+
+password.onkeyup = (evento) => {
+    // console.log(evento);
+    const key2 = evento.key;
+    const isLowerCaseLetter = /[a-z]/.test(key2);
+    const isUpperCaseLetter = /[A-Z]/.test(key2);
+    const isNumber = /[0-9]/.test(key2);
+
+    console.log();
+    // if (isLowerCaseLetter && !isUpperCaseLetter ) {
+
+    // };
+    console.log(isLowerCaseLetter);
+    console.log(isUpperCaseLetter);
+    console.log(isNumber);
+
+    // let key = evento.key;
+    // if (key >= "a" && key <= "z") {
+    //     console.log(`Minúscula: ${key}`);
+    // } else if (key >= "A" && key <= "Z") {
+    //     console.log(`Mayúscula: ${key}`);
+    // }
+    // console.log(evento);
+    // console.log(`Tecla presionada ${password.value}`);
+};
+
+// //Informacion del evento
+// password.addEventListener("keypress", (evento) => {
+//     let codCaracter = evento.charCode;
+//     if (codCaracter != 0) {
+//         //chequeo si el caracter no es nulo
+//         if (codCaracter < 97 || codCaracter > 122) {
+//             // verificar si el codigo ascci no corresponde a una minuscula
+//             evento.preventDefault();
+//             alert("Solo podes ingresar una minuscula");
+//         }
+//     }
+// });
