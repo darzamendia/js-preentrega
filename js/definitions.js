@@ -53,6 +53,19 @@ class NewLogo {
     }
 }
 
+inputName = document.getElementById("inputName");
+inputName = document.getElementById("inputName");
+inputName = document.getElementById("inputName");
+
+function addSwitch(newKbSwitch) {
+    const kbSwitch = new KbSwitch(inputName.value, inputType.value, inputForce.value);
+    if (inputDetail != "") {
+        kbSwitch.detail = inputDetail;
+    } else {
+        kbSwitch.detail = "sin reseña";
+    }
+}
+
 menuList.push(new MenuOption(1, "Agregar item"));
 menuList.push(new MenuOption(2, "visualizar carrito"));
 menuList.push(new MenuOption(3, "Realizar compra"));

@@ -84,7 +84,7 @@ console.log(cont.innerHTML);
 // let contenedorJS = document.querySelector;
 
 const btnSearch = document.getElementById("btnSearch");
-const btnTienda = document.getElementById("btnTienda");
+// const btnTienda = document.getElementById("btnTienda");
 
 function tienda() {
     alert("Tienda");
@@ -133,9 +133,10 @@ for (const radioTest of radioColor) {
 
 let password = document.getElementById("inputPassword");
 
-password.onchange = () => {
-    console.log(password.value);
-};
+// password.addEventListener("change", () => console.log(password.value));
+// password.onchange = () => {
+//     console.log(password.value);
+// };
 
 // password.addEventListener("keypress", (evento) => {
 //     console.log(evento.code);
@@ -152,6 +153,7 @@ password.onkeyup = (evento) => {
     // if (isLowerCaseLetter && !isUpperCaseLetter ) {
 
     // };
+    console.log(key2);
     console.log(isLowerCaseLetter);
     console.log(isUpperCaseLetter);
     console.log(isNumber);

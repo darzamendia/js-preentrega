@@ -14,8 +14,9 @@
     </body>
     <script defer src="./js/definitions.js"></script>
     <script defer src="./js/functions.js"></script>
+    <script defer src="./js/storageAux.js"></script>
     <!-- <script defer src="./js/script.js"></script> -->
-    <script defer src="./js/auxlab.js"></script>
+    <!-- <script defer src="./js/auxlab.js"></script> -->
     <title>Keeb me! (Pre-entrega 3)</title>
 
 </head>
@@ -52,108 +53,224 @@
                         <a id="btnContacto" class="nav-link" href="#">Contactos</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
+                <!-- <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button id="btnSearch" class="btn btn-outline-light" type="submit">Buscar</button>
-                </form>
+                </form> -->
             </div>
         </div>
     </nav>
+
     <main>
         <div class="container">
-
             <div class="py-5 text-center">
                 <img class="d-block mx-auto mb-4 mainLogo" src="./img/kblogo.svg" alt="Keyboard Logo" id="mainLogo">
                 <h1>Keeb me!</h1>
                 <p class="lead">(Pre-entrega 3 - Coderhouse - JavaScript)</p>
             </div>
+
+            <div class="row">
+                <div class=" row my-3 text-bg-dark p-1">
+                    <div class="col-3">
+                        <select class="form-select form-select-sm" id="selectCriteria">
+                            <option disabled selected>Elegí un criterio de búsqueda</option>
+                            <option value="autor">Autor</option>
+                            <option value="titulo">Título</option>
+                        </select>
+                    </div>
+
+                    <div class="col-9">
+                        <input type=" text" class="form-control form-control-sm" id="inputSearch"
+                            placeholder="Ingresar búsqueda...">
+                    </div>
+                </div>
+            </div>
+            <section class="text-center container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <p>
+                            <a href="#" class="btn btn-primary my-2" id="btnUploadDefault">Carga default</a>
+                            <a href="#" class="btn btn-secondary my-2" id="btnClearList">Limpiar listado</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <div class="row">
+                <div class="col-3 text-bg-dark" id="form-container">
+
+                    <form class="m-4">
+                        <div class="mb-3">
+                            <label for="inputSwitchName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control form-control-sm" id="inputSwitchName">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="selectType" class="form-label">Tipo</label>
+                            <select class="form-select form-select-sm" id="selectType">
+                                <option disabled selected>Elegí una categoría</option>
+                                <option value="clicky">Clicky</option>
+                                <option value="tactile">Tactile</option>
+                                <option value="linear">Linear</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="selectTopHousing" class="form-label">Top housing</label>
+                            <select class="form-select form-select-sm" id="selectTopHousing">
+                                <option disabled selected>Seleccione un material...</option>
+                                <option value="abs">ABS</option>
+                                <option value="nylon">Nylon</option>
+                                <option value="policarbonato">Policarbonato</option>
+                                <option value="polietileno">Polietileno</option>
+                                <option value="polietileno">Poliamida</option>
+                                <option value="pom">POM</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="selectBottomHousing" class="form-label">Bottom housing</label>
+                            <select class="form-select form-select-sm" id="selectBottomHousing">
+                                <option disabled selected>Seleccione un material...</option>
+                                <option value="abs">ABS</option>
+                                <option value="nylon">Nylon</option>
+                                <option value="policarbonato">Policarbonato</option>
+                                <option value="polietileno">Polietileno</option>
+                                <option value="polietileno">Poliamida</option>
+                                <option value="pom">POM</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="selectStem" class="form-label">Stem</label>
+                            <select class="form-select form-select-sm" id="selectStem">
+                                <option disabled selected>Seleccione un material...</option>
+                                <option value="abs">ABS</option>
+                                <option value="nylon">Nylon</option>
+                                <option value="policarbonato">Policarbonato</option>
+                                <option value="polietileno">Polietileno</option>
+                                <option value="polietileno">Poliamida</option>
+                                <option value="pom">POM</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputSpring" class="form-label">Spring (g)</label>
+                            <input type="text" class="form-control form-control-sm" id="inputSpring">
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="checkFactoryLubed">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Factory lubed
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputUrlImage" class="form-label">URL de la imagen de portada</label>
+                            <input type="text" class="form-control" id="inputUrlImage">
+                        </div>
+                        <div class="mb-3">
+                            <label for="textAreaReview" class="form-label">Review</label>
+                            <textarea class="form-control" id="textAreaReview"></textarea>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="selectRating" class="form-label">Rating</label>
+                                <select class="form-select form-select-sm" id="selectRating">
+                                    <option disabled selected>Cuántas estrellas le das?</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary my-2" id="btnAddSwitch">Agregar</button>
+                    </form>
+
+
+                </div>
+
+                <div class="col-9 bg-info p-2 text-dark bg-opacity-50">
+                    <div class="row row-cols-1 row-cols-md-4 g-3 py-3" id="cardContainer">
+                    </div>
+                </div>
+
+
+                <div class="p-3 position-relative overflow-hidden text-center bg-light" id="kbSwitchDetail">
+
+                </div>
+
+            </div>
             <h1 id="mainTitle">Hello, world!</h1>
 
-            <div class="radios">
-                <div class="form-check">
-                    <input class="form-check-input radioColor" type="radio" name="flexRadioDefault" id="radioBaseColor"
-                        value="Base" checked>
-                    <label class="form-check-label" for="radioBaseColor">
-                        Base logo
-                    </label>
+            <!-- Form -->
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">@</span>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                    aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Recipient's username"
+                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <span class="input-group-text" id="basic-addon2">@example.com</span>
+            </div>
+
+            <label for="basic-url" class="form-label">Your vanity URL</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
+                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-text">.00</span>
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username">
+                <span class="input-group-text">@</span>
+                <input type="text" class="form-control" placeholder="Server" aria-label="Server">
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-text">With textarea</span>
+                <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>
+        </div>
+        <div class="register container">
+            <h2>Registrar</h2>
+            <form>
+                <!-- <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div> -->
+
+
+                <div class="mb-3">
+                    <label for="inputRegisterUsername" class="form-label">Nombre usuario</label>
+                    <input type="text" class="form-control" id="inputRegisterUsername">
+                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input radioColor" type="radio" name="flexRadioDefault" id="radioCreamyBlot"
-                        value="Creamy-blot">
-                    <label class="form-check-label" for="radioCreamyBlot">
-                        Creamy Blot
-                    </label>
+                <div class="mb-3">
+                    <label for="inputRegisterEmail" class="form-label">Dirección de correo electrónico</label>
+                    <input type="email" class="form-control" id="inputRegisterEmail" aria-describedby="emailHelp">
+                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                 </div>
-            </div>
-
-            <div class="col-sm-6">
-                <label for="firstName" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-                <div class="invalid-feedback">
+                <div class="mb-3">
+                    <label for="inputRegisterPassword" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="inputRegisterPassword">
                 </div>
-            </div>
-
-            <div class="col-sm-6">
-                <label for="lastName" class="form-label">Apellido</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-                <div class="invalid-feedback">
+                <div class="mb-3">
+                    <label for="inputRegisterRePassword" class="form-label">Reingresar contraseña</label>
+                    <input type="password" class="form-control" id="inputRegisterRePassword">
                 </div>
-            </div>
-
-            <div class="col-sm-6">
-                <label for="inputPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword" placeholder="" value="" required="">
-                <div class="invalid-feedback">
-                </div>
-            </div>
-
-
-            test
-            <!-- Content here -->
-
-            <div id="table">
-                <p id="parrafo">
-                    Prueba de parrafo para table
-                </p>
-            </div>
-
-            <ul>
-                <li class="switches">SP Meteor Whites</li>
-                <li class="switches">Gateron Oil King</li>
-                <li class="switches">JWK T1</li>
-                <li class="switches">Gateron CJ</li>
-            </ul>
-
-            <div>
-                <p>Parrafo 1</p>
-                <p>Parrafo 2</p>
-            </div>
-
-            <div id="contenedor">
-                <p>Contenedor 01</p>
-                <p>Contenedor 02</p>
-                <p>Contenedor 03</p>
-                <p>Contenedor 04</p>
-                <p>Contenedor 05</p>
-                <p>Contenedor 06</p>
-            </div>
-
-            <div id="contenedor2"></div>
-            <ul id="switchList"></ul>
-            <ul id="switchListDos"></ul>
-
-            <div id="contenedor3">
-                <p>Contenedor 01</p>
-                <p>Contenedor 02</p>
-                <p>Contenedor 03</p>
-                <p>Contenedor 04</p>
-                <p>Contenedor 05</p>
-                <p>Contenedor 06</p>
-            </div>
-
+                <button type="submit" id="btnRegister" class="btn btn-primary">Registrar</button>
+            </form>
+        </div>
     </main>
-    </div>
-
 </body>
 
 </html>

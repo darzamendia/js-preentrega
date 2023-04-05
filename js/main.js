@@ -1,6 +1,6 @@
-while (optionSelected != 0) {
-    optionSelected = menu();
-    execute(optionSelected);
-}
+// while (optionSelected != 0) {
+//     optionSelected = menu();
+//     execute(optionSelected);
+// }
 
-alert("Fin del programa");
+// alert("Fin del programa");
