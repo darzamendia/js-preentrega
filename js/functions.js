@@ -239,6 +239,8 @@ const checkFactoryLubed = document.getElementById("checkFactoryLubed");
 const btnUploadDefault = document.getElementById("btnUploadDefault");
 const btnClearList = document.getElementById("btnClearList");
 const kbSwitchDetail = document.getElementById("kbSwitchDetail");
+const selectCriteria = document.getElementById("selectCriteria");
+const inputSearch = document.getElementById("inputSearch");
 
 class KbSwitch {
     constructor(
@@ -254,7 +256,9 @@ class KbSwitch {
         image,
         id,
         unitPrice,
-        btnId
+        cardId,
+        btnId,
+        btnDelId
     ) {
         this.name = name;
         this.type = type;
@@ -268,11 +272,14 @@ class KbSwitch {
         this.id = parseInt(id);
         this.unitPrice = parseFloat(unitPrice);
         this.image = image;
+        // this.cardId = cardId;
         this.btnId = btnId;
+        this.btnDelId = btnDelId;
     }
     assignId(array) {
-        this.id = array.length;
+        this.id = newId(kbSwitchReviews);
         this.btnId = `btnDetail${this.id}`;
+        this.btnDelId = `btnDelete${this.id}`;
     }
     addReview(review) {
         this.review = review;
@@ -291,6 +298,20 @@ class KbSwitch {
     }
 }
 
+function newId(array) {
+    let keep = true;
+    let newIndex = 0;
+    while (keep) {
+        newIndex = Math.floor(Math.random() * 99999);
+        let set = array.find((kbSwitch) => kbSwitch.id == newIndex);
+        console.log(`ID generado: ${newIndex}`);
+        if (!set) {
+            console.log(`Valido!: ${newIndex}`);
+            keep = false;
+        }
+    }
+    return newIndex;
+}
 function registrarSwitch() {
     const kbSwitch = new KbSwitch(
         switchName.value,
@@ -335,7 +356,10 @@ function createCard(arrayElement, containerHtml) {
                     <img src="${element.image}" class="card-img-top" alt="${element.name}">
                     <div class="card-body">
                         <h4 class="card-title">${element.name}</h4>
-                        <a href="#kbSwitchDetail" class="btn btn-primary" id="btnDetail${element.id}">Ver detalle</a>
+                        <div class="d-grid gap-1 col-5 mx-auto">
+                            <a href="#kbSwitchDetail" class="btn btn-outline-dark btn-sm" id="btnDetail${element.id}">Detalle</a>
+                            <a href="#" class="btn btn-outline-dark btn-sm" id="btnDelete${element.id}">Descartar</a>
+                        </div>
                     </div>
                 </div>
             </div>`;
@@ -348,11 +372,28 @@ function createCard(arrayElement, containerHtml) {
             createDetailContainer(switchFound, kbSwitchDetail);
             document.getElementById("kbSwitchDetail").scrollIntoView();
         });
+        const btnDelete = document.getElementById(`btnDelete${element.id}`);
+        btnDelete.addEventListener("click", (e) => {
+            e.preventDefault();
+            let eTarget = e.target;
+            // console.log(kbSwitchReviews);
+
+            console.log(`Target seleccionado: ${eTarget.id}`);
+            let switchFound = buscarSwitch(kbSwitchReviews, "btnDelId", eTarget.id);
+
+            const newArray = kbSwitchReviews.filter((kbSwitch) => {
+                return kbSwitch.btnDelId !== switchFound.btnDelId;
+            });
+            console.log(newArray);
+
+            kbSwitchReviews = newArray;
+            saveStorage(kbSwitchReviews);
+            createCard(kbSwitchReviews, cardContainer);
+        });
     }
 }
 
 function createDetailContainer(kbSwitch, containerHtml) {
-    console.log(kbSwitch.name);
     containerHtml.innerHTML = "";
     let divCard = document.createElement("div");
     divCard.innerHTML = `<div class="card h-100">
@@ -425,6 +466,19 @@ btnClearList.addEventListener("click", (e) => {
     clearStorage();
 });
 
+inputSearch.addEventListener("input", () => {
+    let criterio = selectCriteria.value;
+    if (criterio == "Filtrar listado...") {
+        selectCriteria.style.border = "solid indianred";
+        inputSearch.value = "";
+    } else {
+        selectCriteria.style.border = "";
+        let chain = inputSearch.value.toUpperCase();
+        let kbSwitchesFiltered = filterList(kbSwitchReviews, criterio, chain);
+        createCard(filterList(kbSwitchReviews, criterio, chain), cardContainer);
+    }
+});
+
 const defaultSwitchList = [];
 
 function registrarSwitchDefault() {
@@ -461,6 +515,12 @@ function buscarSwitch(array, criterio, input) {
 
 function changeLogoColor(element, source) {
     element.src = source;
+}
+
+function filterList(array, criterio, input) {
+    // return array.filter((item) => item[criterio].includes(input));
+
+    return array.filter((item) => item[criterio].toUpperCase().includes(input));
 }
 
 window.onload = () => {

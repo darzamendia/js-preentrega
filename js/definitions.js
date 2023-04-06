@@ -81,16 +81,18 @@ class NewLogo {
         this.url = url;
     }
 }
-logos.push(new NewLogo(1, "Base", "./img/kblogo.svg"));
-logos.push(new NewLogo(2, "Creamy-blot", "./img/kblogo-creamy-blot.svg"));
+logos.push(new NewLogo(1, "btnLogoLavanda", "./img/logo-lavander.svg"));
+logos.push(new NewLogo(2, "btnLogoRojo", "./img/logo-red.svg"));
+logos.push(new NewLogo(3, "btnLogoVerde", "./img/logo-green.svg"));
 
 let mainLogo = document.getElementById("mainLogo");
 let navLogo = document.getElementById("navLogo");
 
-const btnBaseColor = document.getElementById("Base");
-const btnBlotColor = document.getElementById("Creamy-blot");
+const btnLogoLavanda = document.getElementById("btnLogoLavanda");
+const btnLogoRojo = document.getElementById("btnLogoRojo");
+const btnLogoVerde = document.getElementById("btnLogoVerde");
 
-btnBlotColor.addEventListener("click", (e) => {
+btnLogoLavanda.addEventListener("click", (e) => {
     let target = e.target;
     let logoName = target.id;
 
@@ -104,7 +106,21 @@ btnBlotColor.addEventListener("click", (e) => {
     changeLogoColor(navLogo, logoSel.url);
 });
 
-btnBaseColor.addEventListener("click", (e) => {
+btnLogoRojo.addEventListener("click", (e) => {
+    let target = e.target;
+    let logoName = target.id;
+
+    console.log(logos);
+    console.log(logoName);
+    let logoSel = logos.find((logo) => logo.name == logoName);
+
+    console.log(logoSel);
+
+    changeLogoColor(mainLogo, logoSel.url);
+    changeLogoColor(navLogo, logoSel.url);
+});
+
+btnLogoVerde.addEventListener("click", (e) => {
     let target = e.target;
     let logoName = target.id;
 
