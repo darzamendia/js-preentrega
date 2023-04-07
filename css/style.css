@@ -5,3 +5,8 @@
 .detailSwitchImage {
     height: 30vh;
 }
+
+.bgLavanda {
+    background-color: #B6A4FE;
+    border: #B6A4FE;
+}

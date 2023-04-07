@@ -1,229 +1,5 @@
-// function menu() {
-//     let text = `Seleccione una opción`;
-//     menuList.forEach((item) => {
-//         text += `\n${item.title}`;
-//     });
-//     return userInput(text, menuList);
-// }
-
-// function userInput(menuText, list) {
-//     let userInput;
-//     found = false;
-//     while (!found) {
-//         userInput = parseInt(prompt(`${menuText}`));
-//         valInput(userInput, list);
-//     }
-//     return userInput;
-// }
-
-// function valInput(ingreso, list) {
-//     for (const option of list) {
-//         found = checkProcess(ingreso, option);
-//         if (found) {
-//             break;
-//         }
-//     }
-// }
-
-// function checkProcess(userInput, option) {
-//     for (const prop in option) {
-//         if (option[prop] == userInput) {
-//             return true;
-//         }
-//     }
-// }
-
-// function execute(option) {
-//     switch (option) {
-//         case 1:
-//             addItem();
-//             break;
-//         case 2:
-//             showList();
-//             break;
-//         case 3:
-//             buy();
-//             break;
-//     }
-// }
-
-// function addItem() {
-//     let newSelected = selectItem();
-//     let cantidad = parseInt(prompt(`Cantidad de unidades:`));
-//     cartList.push(
-//         new newCartList(newSelected.id, newSelected.name, newSelected.price, cantidad, newSelected.price * cantidad)
-//     );
-//     alert(`Se agregó el item al carrito`);
-// }
-
-// function selectItem() {
-//     text = `Seleccione el switch:`;
-//     itemList.forEach((item) => {
-//         text += `\n${item.id} - ${item.name}: $${item.price}`;
-//     });
-//     let idSelected = userInput(text, itemList);
-//     return itemList.find((object) => object.id === idSelected);
-// }
-
-// function userInputOp1(text) {
-//     let userInput;
-//     found = false;
-//     while (!found) {
-//         userInput = parseInt(prompt(`${text}`));
-//         valInput(userInput, itemList);
-//     }
-//     return userInput;
-// }
-
-// function inputId() {
-//     ingreso = parseInt(prompt(`Ingrese el ID del producto:`));
-//     while (isNaN(ingreso)) {
-//         ingreso = parseInt(prompt("El dato ingresado es incorrecto. Ingrese el ID del producto:"));
-//     }
-//     return ingreso;
-// }
-
-// function inputName() {
-//     ingreso = prompt(`Ingrese el nombre del producto`);
-//     return ingreso;
-// }
-
-// function inputPrice() {
-//     ingreso = parseFloat(prompt(`Ingrese el ID del producto:`));
-//     while (isNaN(ingreso)) {
-//         ingreso = parseFloat(prompt("El dato ingresado es incorrecto. Ingrese el ID del producto:"));
-//     }
-//     return ingreso;
-// }
-
-// function showList() {
-//     if (cartList.length > 0) {
-//         let totalCart = 0;
-//         let currentList = `Items del carrito:`;
-//         cartList.forEach(function callback(value, index) {
-//             value.totalItem();
-//             currentList += `\n${index + 1} - ${value.name} x ${value.quantity} unidades: $${value.totalPrice}`;
-//             totalCart += value.totalPrice;
-//         });
-//         currentList += `\n\nImporte total: $${totalCart}`;
-//         prompt(currentList);
-//     } else {
-//         alert(emptyCart);
-//     }
-// }
-
-// function buy() {
-//     if (cartList.length > 0) {
-//         let cuotas = selectCuotas();
-//         let total = getTotalCart();
-//         informImports(cuotas, total);
-//         cartList = [];
-//         reExecute();
-//     } else {
-//         alert(emptyCart);
-//     }
-// }
-
-// function selectCuotas() {
-//     let cuotaListItems = `Ingrese las cuotas`;
-//     cuotas.forEach((cuotaItem) => {
-//         cuotaListItems += `\n${cuotaItem.id} - Cuotas (Interes: ${cuotaItem.percent}%)`;
-//     });
-//     let idSelected = userInput(cuotaListItems, cuotas);
-//     return cuotas.find((object) => object.id === idSelected);
-// }
-
-// function getTotalCart() {
-//     let totalCart = 0;
-//     cartList.forEach((cartItem) => {
-//         cartItem.totalPrice = cartItem.quantity * cartItem.unitPrice;
-//         totalCart += cartItem.totalPrice;
-//     });
-//     return decimalsTwo(parseFloat(totalCart));
-// }
-
-// function informImports(cuotas, total) {
-//     let localTotal = parseFloat(total);
-//     let cuotaPercentImport = decimalsTwo(parseFloat(localTotal * cuotas.percent) / 100);
-//     cuotaPercentImport = parseFloat(cuotaPercentImport);
-//     let finalImport = cuotaPercentImport + localTotal;
-//     let cuotaImport = finalImport / cuotas.id;
-//     localTotal = decimalsTwo(localTotal);
-//     cuotaPercentImport = decimalsTwo(cuotaPercentImport);
-//     finalImport = decimalsTwo(finalImport);
-//     cuotaImport = decimalsTwo(cuotaImport);
-
-//     alert(
-//         `Precio total del listado: $${localTotal}\n- Importe del interes por cuotas seleccionadas: $${cuotaPercentImport}\n- El importe final a pagar es de $${finalImport}\n- El pago se realizará en ${cuotas.id} cuotas de $${cuotaImport}\n- El porcentaje del interes es de ${cuotas.percent}%`
-//     );
-// }
-
-// function decimalsTwo(input) {
-//     return input.toFixed(2);
-// }
-
-// function reExecute() {
-//     let response;
-//     while (!yesNo.includes(response)) {
-//         response = prompt(`Desea volver a ejecutar un nuevo proceso? [S/N]`);
-//         response = response.toUpperCase();
-//     }
-//     if (response == "N") {
-//         optionSelected = 0;
-//     }
-// }
-
-// function changeLogoColor(element, source) {
-//     element.src = source;
-// }
-
-// function registrarUsuario(storage) {
-//     let username = document.getElementById("inputRegisterUsername").value;
-//     let email = document.getElementById("inputRegisterEmail").value;
-//     let password = document.getElementById("inputRegisterPassword").value;
-//     // let rePassword = document.getElementById("inputRegisterRePassword");
-//     const newUser = {
-//         username: username,
-//         email: email,
-//         password: password,
-//     };
-//     // console.log(newUser);
-//     storage.setItem("user", JSON.stringify(newUser));
-//     username = email = password = "";
-//     console.log(username);
-// }
-
-// function borrarTodosUsuarios(storage) {
-//     storage.clear();
-// }
-
-// function borrarUsuario(storage, clave) {
-//     storage.removeItem(clave);
-// }
-
-// const btnRegister = document.getElementById("btnRegister");
-// btnRegister.addEventListener("click", (e) => {
-//     // e.preventDefault();
-//     registrarUsuario(sessionStorage);
-// });
-
-// const btnTienda = document.getElementById("btnTienda");
-
-// btnTienda.addEventListener("click", (e) => {
-//     console.log(e);
-// });
-
-// window.onload = () => {
-//     let usuarioStorage = JSON.parse(sessionStorage.getItem("user"));
-//     if (usuarioStorage) {
-//         alert(usuarioStorage.username);
-//     }
-// };
-
-// pre-entrega 3
 let kbSwitchReviews = [];
 
-// const btn = document.getElementById("inputSwitchName");
 const switchName = document.getElementById("inputSwitchName");
 const switchType = document.getElementById("selectType");
 const switchTopHousing = document.getElementById("selectTopHousing");
@@ -256,7 +32,6 @@ class KbSwitch {
         image,
         id,
         unitPrice,
-        cardId,
         btnId,
         btnDelId
     ) {
@@ -272,12 +47,11 @@ class KbSwitch {
         this.id = parseInt(id);
         this.unitPrice = parseFloat(unitPrice);
         this.image = image;
-        // this.cardId = cardId;
         this.btnId = btnId;
         this.btnDelId = btnDelId;
     }
     assignId(array) {
-        this.id = newId(kbSwitchReviews);
+        this.id = newId(array);
         this.btnId = `btnDetail${this.id}`;
         this.btnDelId = `btnDelete${this.id}`;
     }
@@ -289,7 +63,6 @@ class KbSwitch {
     }
 
     assignImage(url) {
-        console.log(url);
         if (url == "") {
             this.image = "./img/no-image-svgrepo-com.svg";
         } else {
@@ -304,9 +77,7 @@ function newId(array) {
     while (keep) {
         newIndex = Math.floor(Math.random() * 99999);
         let set = array.find((kbSwitch) => kbSwitch.id == newIndex);
-        console.log(`ID generado: ${newIndex}`);
         if (!set) {
-            console.log(`Valido!: ${newIndex}`);
             keep = false;
         }
     }
@@ -320,11 +91,13 @@ function registrarSwitch() {
         switchBottomHousing.value,
         switchStem.value,
         switchSpring.value,
-        checkFactoryLubed.value,
-        switchRating.value
+        checkFactoryLubed.checked,
+        switchRating.value,
+        textAreaReview.value,
+        switchUrlImage.value
     );
 
-    if (textAreaReview != "") {
+    if (textAreaReview.value.length != 0) {
         kbSwitch.addReview(textAreaReview.value);
     } else {
         kbSwitch.addReview("No ingresó review");
@@ -337,7 +110,6 @@ function registrarSwitch() {
 }
 
 function saveStorage(kbSwitchReviews) {
-    console.log(kbSwitchReviews);
     localStorage.setItem("reviewSwitches", JSON.stringify(kbSwitchReviews));
 }
 
@@ -356,7 +128,7 @@ function createCard(arrayElement, containerHtml) {
                     <img src="${element.image}" class="card-img-top" alt="${element.name}">
                     <div class="card-body">
                         <h4 class="card-title">${element.name}</h4>
-                        <div class="d-grid gap-1 col-5 mx-auto">
+                        <div class="d-grid gap-1 mx-auto">
                             <a href="#kbSwitchDetail" class="btn btn-outline-dark btn-sm" id="btnDetail${element.id}">Detalle</a>
                             <a href="#" class="btn btn-outline-dark btn-sm" id="btnDelete${element.id}">Descartar</a>
                         </div>
@@ -376,30 +148,41 @@ function createCard(arrayElement, containerHtml) {
         btnDelete.addEventListener("click", (e) => {
             e.preventDefault();
             let eTarget = e.target;
-            // console.log(kbSwitchReviews);
-
-            console.log(`Target seleccionado: ${eTarget.id}`);
             let switchFound = buscarSwitch(kbSwitchReviews, "btnDelId", eTarget.id);
-
             const newArray = kbSwitchReviews.filter((kbSwitch) => {
                 return kbSwitch.btnDelId !== switchFound.btnDelId;
             });
-            console.log(newArray);
-
             kbSwitchReviews = newArray;
             saveStorage(kbSwitchReviews);
             createCard(kbSwitchReviews, cardContainer);
+            clearDetailContainer(switchFound.id);
         });
+    }
+}
+
+function clearDetailContainer(id) {
+    const containerFound = document.getElementById(id);
+    console.log(id);
+    if (containerFound) {
+        containerFound.innerHTML = "";
     }
 }
 
 function createDetailContainer(kbSwitch, containerHtml) {
     containerHtml.innerHTML = "";
     let divCard = document.createElement("div");
-    divCard.innerHTML = `<div class="card h-100">
+    let lubed;
+    if (kbSwitch.factoryLubed) {
+        lubed = "Si";
+    } else {
+        lubed = "No";
+    }
+    divCard.id = kbSwitch.id;
+    divCard.innerHTML = `<div class="card h-100"">
             <h4 class="card-header">${kbSwitch.name}</h4>
             <img src="${kbSwitch.image}"
                         class="rounded mx-auto d-block detailSwitchImage" alt="${kbSwitch.name}">
+            <h2 class="fs-1 fst-italic mb-5">"...${kbSwitch.review}..."</h2>
             <table class="table table-borderless">
                 <thead>
                     <tr>
@@ -421,25 +204,25 @@ function createDetailContainer(kbSwitch, containerHtml) {
                 </tbody>
                 <thead>
                     <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Top housing</th>
-                    <th scope="col">Bottom housing</th>
-                    <th scope="col">Stem</th>
-                    <th scope="col">Spring</th>
+                    <th scope="col">Factory Lubed</th>
+                    <th scope="col">Puntaje</th>
+                    <th scope="col">ID</th>
                     </tr>
                 </thead>
+                <tbody>
+                    <tr>
+                    <td>${lubed}</td>
+                    <td>${kbSwitch.rating}</td>
+                    <td>${kbSwitch.id}</td>
+                    </tr>   
+                </tbody>
             </table>
+            <div class="d-grid col-4 mx-auto">
+                <a href="#cardContainer" class="btn btn-outline-dark btn-sm my-2" id="btnBackToCardContainer">Volver</a>
+            </div>
         </div>`;
-
     containerHtml.append(divCard);
 }
-
-// function setStorage() {
-//     // saveStorage(kbSwitchReviews);
-//     console.log(kbSwitchReviews);
-//     const aux = localStorage.getItem("reviewSwitches", JSON.stringify(kbSwitchReviews));
-//     console.log(aux);
-// }
 
 function clearCardContainer(containerHtml) {
     containerHtml.innerHTML = "";
@@ -447,14 +230,81 @@ function clearCardContainer(containerHtml) {
 
 btnAddSwitch.addEventListener("click", (e) => {
     e.preventDefault();
-    registrarSwitch(kbSwitchReviews);
-    saveStorage(kbSwitchReviews);
-    createCard(kbSwitchReviews, cardContainer);
+    let valido = valInputs();
+    if (valido) {
+        registrarSwitch(kbSwitchReviews);
+        saveStorage(kbSwitchReviews);
+        createCard(kbSwitchReviews, cardContainer);
+        clearInputs();
+    }
 });
+
+function clearInputs() {
+    switchName.value = "";
+    switchType.value = "Seleccionar tipo...";
+    switchTopHousing.value = "Seleccionar material...";
+    switchBottomHousing.value = "Seleccionar material...";
+    switchStem.value = "Seleccionar material...";
+    switchSpring.value = "";
+    checkFactoryLubed.checked = false;
+    switchUrlImage.value = "";
+    textAreaReview.value = "";
+    switchRating.value = "Puntuación...";
+}
+
+function valInputs() {
+    let inputsOk = true;
+    if (switchName.value == "") {
+        switchName.style.border = "solid indianred";
+        inputsOk = false;
+        backToContainer();
+    } else {
+        switchName.style.border = "";
+    }
+    if (switchType.value == "Seleccionar tipo...") {
+        switchType.style.border = "solid indianred";
+        inputsOk = false;
+        backToContainer();
+    } else {
+        switchType.style.border = "";
+    }
+    if (switchTopHousing.value == "Seleccionar material...") {
+        switchTopHousing.style.border = "solid indianred";
+        inputsOk = false;
+        backToContainer();
+    } else {
+        switchTopHousing.style.border = "";
+    }
+    if (switchBottomHousing.value == "Seleccionar material...") {
+        switchBottomHousing.style.border = "solid indianred";
+        inputsOk = false;
+        backToContainer();
+    } else {
+        switchBottomHousing.style.border = "";
+    }
+    if (switchStem.value == "Seleccionar material...") {
+        switchStem.style.border = "solid indianred";
+        inputsOk = false;
+        backToContainer();
+    } else {
+        switchStem.style.border = "";
+    }
+    if (switchSpring.value == "" || isNaN(switchSpring.value)) {
+        switchSpring.style.border = "solid indianred";
+        inputsOk = false;
+        backToContainer();
+    } else {
+        switchSpring.style.border = "";
+    }
+    return inputsOk;
+}
+
+function backToContainer() {
+    document.getElementById("cardContainer").scrollIntoView();
+}
 
 btnUploadDefault.addEventListener("click", (e) => {
     e.preventDefault();
-    // console.log(kbSwitchReviews);
     registrarSwitchDefault(kbSwitchReviews);
     saveStorage(kbSwitchReviews);
     createCard(kbSwitchReviews, cardContainer);
@@ -464,6 +314,10 @@ btnClearList.addEventListener("click", (e) => {
     e.preventDefault();
     clearCardContainer(cardContainer);
     clearStorage();
+    const containerFound = document.getElementById("kbSwitchDetail");
+    if (containerFound) {
+        containerFound.innerHTML = "";
+    }
 });
 
 inputSearch.addEventListener("input", () => {
@@ -495,15 +349,13 @@ function registrarSwitchDefault() {
             defSwitch.review,
             defSwitch.image
         );
-
-        if (defSwitch.review != "") {
-            kbSwitch.addReview(textAreaReview.value);
+        console.log(defSwitch.review.length);
+        if (defSwitch.review.length != 0) {
+            kbSwitch.addReview(defSwitch.review);
         } else {
             kbSwitch.addReview("No ingresó review");
         }
-
         kbSwitch.assignImage(defSwitch.image);
-
         kbSwitchReviews.push(kbSwitch);
         kbSwitch.assignId(kbSwitchReviews);
     }
@@ -518,18 +370,15 @@ function changeLogoColor(element, source) {
 }
 
 function filterList(array, criterio, input) {
-    // return array.filter((item) => item[criterio].includes(input));
-
     return array.filter((item) => item[criterio].toUpperCase().includes(input));
 }
 
 window.onload = () => {
     let usuarioStorage = JSON.parse(localStorage.getItem("reviewSwitches"));
-    // console.log(kbSwitchReviews);
-    for (const element of usuarioStorage) {
-        // console.log(`elemento: ${element.name}`);
-        kbSwitchReviews.push(element);
+    if (usuarioStorage) {
+        for (const element of usuarioStorage) {
+            kbSwitchReviews.push(element);
+            createCard(usuarioStorage, cardContainer);
+        }
     }
-    // console.log(kbSwitchReviews);
-    createCard(usuarioStorage, cardContainer);
 };
