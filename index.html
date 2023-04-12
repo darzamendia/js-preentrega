@@ -12,12 +12,22 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
     </body>
+    <script defer src="./js/class.js"></script>
     <script defer src="./js/definitions.js"></script>
     <script defer src="./js/functions.js"></script>
     <script defer src="./js/defaultdata.js"></script>
+    <script defer src="./js/main.js"></script>
     <link rel="stylesheet" href="./css/style.css">
     <title>Keeb me! (Pre-entrega 3)</title>
 </head>
+<!--
+    Agregar:
+    1. Market
+    2. Cart
+    3. Finalización de compra
+    4. Reset al finalizar
+    5. Home
+-->
 
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -33,11 +43,22 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse  justify-content-end me-auto collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" id="btnNavHome" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="btnNavMarket" href="#">Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="btnNavCart" href="#">Carrito</a>
+                    </li>
+                </ul>
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            Cambiar logo
+                            Cambiar color
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" id="btnLogoLavanda" href="#">Lavanda</a></li>
@@ -49,6 +70,9 @@
             </div>
         </div>
     </nav>
+
+
+
     <main>
         <div class="container">
             <div class="py-3 text-center">
@@ -57,6 +81,8 @@
                 <h1>Keeb me!</h1>
                 <p class="lead">(Pre-entrega 3 - Coderhouse - JavaScript)</p>
             </div>
+        </div>
+        <div class="container" id="mainContainer">
             <div class="container text-center">
                 <div class="row">
                     <div class="col">
@@ -173,7 +199,8 @@
                         </div>
                         <div class="vstack gap-2 mx-auto">
                             <button type="submit" class="btn btn-primary bgLavanda btn-sm my-2"
-                                id="btnAddSwitch">Agregar switch</button>
+                                id="btnAddSwitch">Agregar
+                                switch</button>
                         </div>
                     </form>
                 </div>

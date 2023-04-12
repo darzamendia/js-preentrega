@@ -18,64 +18,11 @@ const kbSwitchDetail = document.getElementById("kbSwitchDetail");
 const selectCriteria = document.getElementById("selectCriteria");
 const inputSearch = document.getElementById("inputSearch");
 
-class KbSwitch {
-    constructor(
-        name,
-        type,
-        topHousing,
-        bottomHousing,
-        stem,
-        spring,
-        factoryLubed,
-        rating,
-        review,
-        image,
-        id,
-        unitPrice,
-        btnId,
-        btnDelId
-    ) {
-        this.name = name;
-        this.type = type;
-        this.topHousing = topHousing;
-        this.bottomHousing = bottomHousing;
-        this.stem = stem;
-        this.spring = spring;
-        this.factoryLubed = factoryLubed;
-        this.review = review;
-        this.rating = parseInt(rating);
-        this.id = parseInt(id);
-        this.unitPrice = parseFloat(unitPrice);
-        this.image = image;
-        this.btnId = btnId;
-        this.btnDelId = btnDelId;
-    }
-    assignId(array) {
-        this.id = newId(array);
-        this.btnId = `btnDetail${this.id}`;
-        this.btnDelId = `btnDelete${this.id}`;
-    }
-    addReview(review) {
-        this.review = review;
-    }
-    addRating() {
-        this.rating = rating;
-    }
-
-    assignImage(url) {
-        if (url == "") {
-            this.image = "./img/no-image-svgrepo-com.svg";
-        } else {
-            this.image = url;
-        }
-    }
-}
-
 function newId(array) {
     let keep = true;
     let newIndex = 0;
     while (keep) {
-        newIndex = Math.floor(Math.random() * 99999);
+        newIndex = Math.floor(Math.random() * 9);
         let set = array.find((kbSwitch) => kbSwitch.id == newIndex);
         if (!set) {
             keep = false;
@@ -124,7 +71,7 @@ function createCard(arrayElement, containerHtml) {
         let divCard = document.createElement("div");
         divCard.className = "col";
         divCard.innerHTML = `<div class="col mb-4">
-                <div class="card">
+                <div class="card h-100">
                     <img src="${element.image}" class="card-img-top" alt="${element.name}">
                     <div class="card-body">
                         <h4 class="card-title">${element.name}</h4>
@@ -162,7 +109,6 @@ function createCard(arrayElement, containerHtml) {
 
 function clearDetailContainer(id) {
     const containerFound = document.getElementById(id);
-    console.log(id);
     if (containerFound) {
         containerFound.innerHTML = "";
     }
@@ -349,7 +295,6 @@ function registrarSwitchDefault() {
             defSwitch.review,
             defSwitch.image
         );
-        console.log(defSwitch.review.length);
         if (defSwitch.review.length != 0) {
             kbSwitch.addReview(defSwitch.review);
         } else {
@@ -372,13 +317,3 @@ function changeLogoColor(element, source) {
 function filterList(array, criterio, input) {
     return array.filter((item) => item[criterio].toUpperCase().includes(input));
 }
-
-window.onload = () => {
-    let usuarioStorage = JSON.parse(localStorage.getItem("reviewSwitches"));
-    if (usuarioStorage) {
-        for (const element of usuarioStorage) {
-            kbSwitchReviews.push(element);
-            createCard(usuarioStorage, cardContainer);
-        }
-    }
-};
