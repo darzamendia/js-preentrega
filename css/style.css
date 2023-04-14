@@ -10,3 +10,11 @@
     background-color: #B6A4FE;
     border: #B6A4FE;
 }
+
+.cartImage {
+    width: 3rem;
+}
+
+.carruselImage {
+    height: 35rem;
+}

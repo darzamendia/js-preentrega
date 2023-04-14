@@ -56,6 +56,39 @@ function registrarSwitch() {
     kbSwitch.assignId(kbSwitchReviews);
 }
 
+function addUnitToCart(newUnit) {
+    const kbSwitch = new KbSwitchUnitCart(
+        newUnit.name,
+        newUnit.type,
+        newUnit.topHousing,
+        newUnit.bottomHousing,
+        newUnit.stem,
+        newUnit.spring,
+        newUnit.factoryLubed,
+        newUnit.unitPrice,
+        newUnit.unitStock,
+        "",
+        "",
+        newUnit.image,
+        newUnit.id
+    );
+
+    // if (textAreaReview.value.length != 0) {
+    //     kbSwitch.addReview(textAreaReview.value);
+    // } else {
+    //     kbSwitch.addReview("No ingresó review");
+    // }
+    // console.log(`${kbSwitch.unitPrice} ${kbSwitch.quantity}`);
+    kbSwitch.calcTotal();
+    // console.log(kbSwitch.totalPrice);
+    // kbSwitch.assignImage(switchUrlImage.value);
+
+    kbSwitchCart.push(kbSwitch);
+    console.log(kbSwitchCart);
+    // console.log()
+    // kbSwitch.assignId(kbSwitchReviews);
+}
+
 function saveStorage(kbSwitchReviews) {
     localStorage.setItem("reviewSwitches", JSON.stringify(kbSwitchReviews));
 }
@@ -164,9 +197,14 @@ function createDetailContainer(kbSwitch, containerHtml) {
                 </tbody>
             </table>
             <div class="d-grid col-4 mx-auto">
-                <a href="#cardContainer" class="btn btn-outline-dark btn-sm my-2" id="btnBackToCardContainer">Volver</a>
+                <a href="#mainContainer" class="btn btn-outline-dark btn-sm my-2">Volver</a>
             </div>
         </div>`;
+    // <div class="d-grid col-4 mx-auto">
+    //     <a href="#cardContainer" class="btn btn-outline-dark btn-sm my-2" id="btnBackToCardContainer">
+    //         Volver
+    //     </a>
+    // </div>;
     containerHtml.append(divCard);
 }
 
@@ -203,51 +241,52 @@ function valInputs() {
     if (switchName.value == "") {
         switchName.style.border = "solid indianred";
         inputsOk = false;
-        backToContainer();
+        backToContainer("cardContainer");
     } else {
         switchName.style.border = "";
     }
     if (switchType.value == "Seleccionar tipo...") {
         switchType.style.border = "solid indianred";
         inputsOk = false;
-        backToContainer();
+        backToContainer("cardContainer");
     } else {
         switchType.style.border = "";
     }
     if (switchTopHousing.value == "Seleccionar material...") {
         switchTopHousing.style.border = "solid indianred";
         inputsOk = false;
-        backToContainer();
+        backToContainer("cardContainer");
     } else {
         switchTopHousing.style.border = "";
     }
     if (switchBottomHousing.value == "Seleccionar material...") {
         switchBottomHousing.style.border = "solid indianred";
         inputsOk = false;
-        backToContainer();
+        backToContainer("cardContainer");
     } else {
         switchBottomHousing.style.border = "";
     }
     if (switchStem.value == "Seleccionar material...") {
         switchStem.style.border = "solid indianred";
         inputsOk = false;
-        backToContainer();
+        backToContainer("cardContainer");
     } else {
         switchStem.style.border = "";
     }
     if (switchSpring.value == "" || isNaN(switchSpring.value)) {
         switchSpring.style.border = "solid indianred";
         inputsOk = false;
-        backToContainer();
+        backToContainer("cardContainer");
     } else {
         switchSpring.style.border = "";
     }
     return inputsOk;
 }
 
-function backToContainer() {
-    document.getElementById("cardContainer").scrollIntoView();
+function backToContainer(container) {
+    document.getElementById(container).scrollIntoView();
 }
+// "cardContainer"
 
 btnUploadDefault.addEventListener("click", (e) => {
     e.preventDefault();

@@ -1,5 +1,6 @@
 const logos = [];
 const kbSwitchMarket = [];
+const kbSwitchCart = [];
 
 const mainContainer = document.getElementById("mainContainer");
 
@@ -65,11 +66,20 @@ btnLogoVerde.addEventListener("click", (e) => {
 
 // new
 btnNavHome.addEventListener("click", (e) => {
+    e.preventDefault();
     emptyElement(mainContainer);
 });
+
 btnNavMarket.addEventListener("click", (e) => {
+    e.preventDefault();
     emptyElement(mainContainer);
     setMarketContainer(kbSwitchMarket, mainContainer);
+});
+
+btnNavCart.addEventListener("click", (e) => {
+    e.preventDefault();
+    emptyElement(mainContainer);
+    setCartContainer(kbSwitchCart, mainContainer);
 });
 
 function emptyElement(element) {
@@ -80,9 +90,18 @@ function setMarketContainer(array, element) {
     createMarketCard(array, element);
 }
 
+function setCartContainer(array, element) {
+    createCartCard(array, element);
+}
+
 function createMarketCard(arrayElement, containerHtml) {
     setMarketSearcher(containerHtml);
     setMarketItems(arrayElement, containerHtml);
+}
+
+function createCartCard(arrayElement, containerHtml) {
+    // setMarketSearcher(containerHtml);
+    setCartItems(arrayElement, containerHtml);
 }
 
 function setMarketSearcher(element) {
@@ -120,11 +139,30 @@ function setMarketItems(array, containerHtml) {
     divCardContainer.append(divCardLayout);
     containerHtml.append(divCardContainer);
     addMarketCardBtnFn(array);
+    addMarketCardbtnAddCart(array);
+    // Meter Container detail en fn. addMarketDetailContainer
     divUnitDetailContainer.id = "cntMarketUnitDetail";
+    divUnitDetailContainer.className = "p-3 position-relative overflow-hidden text-center bg-light";
     containerHtml.append(divUnitDetailContainer);
+    //
+}
 
-    // const btn = document.getElementById("btnDetail3");
-    // console.log(btn);
+function setCartItems(array, containerHtml) {
+    let divCardContainer = document.createElement("div");
+    // let divCardLayout = document.createElement("div");
+    let divUnitDetailContainer = document.createElement("div");
+    divCardContainer.className = "container";
+    // divCardLayout.className = "row row-cols-1 row-cols-lg-4 row-cols-md-3 g-4";
+    addCartCard(array, divCardContainer);
+    // divCardContainer.append(divCardLayout);
+    containerHtml.append(divCardContainer);
+    // addMarketCardBtnFn(array);
+    // addMarketCardbtnAddCart(array);
+    // Meter Container detail en fn. addMarketDetailContainer
+    divUnitDetailContainer.id = "cntMarketUnitDetail";
+    divUnitDetailContainer.className = "p-3 position-relative overflow-hidden text-center bg-light";
+    containerHtml.append(divUnitDetailContainer);
+    //
 }
 
 function addMarketCard(array, container) {
@@ -139,41 +177,58 @@ function addMarketCard(array, container) {
                 <h6>Precio: $${element.unitPrice}</h6>
                 <p>Stock: ${element.unitStock}u.</p>
                 <div class="d-grid gap-1 mx-auto">
-                    <a href="#kbSwitchDetail" class="btn btn-outline-dark btn-sm" id="btnDetail${element.id}">Detalle</a>
-                    <a href="#" class="btn btn-outline-dark btn-sm" id="btnDelete${element.id}">Agregar al carrito</a>
+                    <a href="#" class="btn btn-outline-dark btn-sm" id="${element.btnDetail}">Detalle</a>
+                    <a href="#" class="btn btn-outline-dark btn-sm" id="${element.btnAddCart}">Agregar al carrito</a>
                 </div>
             </div>
         </div>`;
         container.append(divCard);
-        console.log(element.btnId);
-        // addMarketCardDetailbtn(element);
-        // console.log(container.innerHTML);
-
-        // btnDetail.addEventListener("click", (e) => {
-        //     e.preventDefault();
-        //     // let eTarget = e.target;
-        //     // let switchFound = buscarSwitch(kbSwitchReviews, "btnId", eTarget.id);
-        //     // createDetailContainer(switchFound, kbSwitchDetail);
-        //     // document.getElementById("kbSwitchDetail").scrollIntoView();
-        // });
     }
-    // const btnDetail = document.getElementById(`${element.btnId}`);
-
-    // array.forEach((element) => {
-    //     console.log(element.btnDetail);
-    // });
+}
+function addCartCard(array, container) {
+    let divCard = document.createElement("ol");
+    divCard.className = "list-group";
+    for (const element of array) {
+        divCard.innerHTML += `
+            <ul class="list-group-item d-flex justify-content-between align-items-start">
+                <img src="${element.image}" class="cartImage" alt="${element.name}">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">${element.name}</div>
+                    $${element.unitPrice} x ${element.quantity}u.
+                </div>
+                <h5>$${element.totalPrice}</h5>
+            </ul>`;
+        container.append(divCard);
+    }
 }
 
 function addMarketCardBtnFn(array) {
     array.forEach((element) => {
-        const btnDetail = document.getElementById(element.btnId);
+        const btnDetail = document.getElementById(element.btnDetail);
         btnDetail.addEventListener("click", (e) => {
             e.preventDefault();
-            let eTarget = e.target;
-            let unitFound = buscarSwitch(kbSwitchMarket, "btnId", eTarget.id);
+            let unitFound = buscarSwitch(kbSwitchMarket, "btnDetail", e.target.id);
             const cntchange = document.getElementById("cntMarketUnitDetail");
             createDetailContainer(unitFound, cntchange);
             document.getElementById("cntMarketUnitDetail").scrollIntoView();
+        });
+    });
+}
+
+function addMarketCardbtnAddCart(array) {
+    console.log(array);
+    array.forEach((element) => {
+        const btnAddCart = document.getElementById(element.btnAddCart);
+        btnAddCart.addEventListener("click", (e) => {
+            e.preventDefault();
+            let newUnit = buscarSwitch(kbSwitchMarket, "btnAddCart", e.target.id);
+            let cartUnit = buscarSwitch(kbSwitchCart, "id", newUnit.id);
+            console.log(cartUnit);
+            // if (valido) {
+            addUnitToCart(newUnit);
+
+            // saveStorage(kbSwitchReviews);
+            // }
         });
     });
 }
@@ -192,59 +247,3 @@ function addMarketCardDetailbtn(element) {
         });
     }
 }
-
-// function createDetailContainer(unit, containerHtml) {
-//     containerHtml.innerHTML = "";
-//     let divCard = document.createElement("div");
-//     let lubed;
-//     if (kbSwitch.factoryLubed) {
-//         lubed = "Si";
-//     } else {
-//         lubed = "No";
-//     }
-//     divCard.id = kbSwitch.id;
-//     divCard.innerHTML = `<div class="card h-100"">
-//             <h4 class="card-header">${unit.name}</h4>
-//             <img src="${unit.image}"
-//                         class="rounded mx-auto d-block detailSwitchImage" alt="${unit.name}">
-//             <h2 class="fs-1 fst-italic mb-5">"...${unit.review}..."</h2>
-//             <table class="table table-borderless">
-//                 <thead>
-//                     <tr>
-//                     <th scope="col">Tipo</th>
-//                     <th scope="col">Top housing</th>
-//                     <th scope="col">Bottom housing</th>
-//                     <th scope="col">Stem</th>
-//                     <th scope="col">Spring</th>
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     <tr>
-//                     <td>${unit.type}</td>
-//                     <td>${unit.topHousing}</td>
-//                     <td>${unit.bottomHousing}</td>
-//                     <td>${unit.stem}</td>
-//                     <td>${unit.spring}g.</td>
-//                     </tr>
-//                 </tbody>
-//                 <thead>
-//                     <tr>
-//                     <th scope="col">Factory Lubed</th>
-//                     <th scope="col">Puntaje</th>
-//                     <th scope="col">ID</th>
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     <tr>
-//                     <td>${lubed}</td>
-//                     <td>${unit.rating}</td>
-//                     <td>${unit.id}</td>
-//                     </tr>
-//                 </tbody>
-//             </table>
-//             <div class="d-grid col-4 mx-auto">
-//                 <a href="#cardContainer" class="btn btn-outline-dark btn-sm my-2" id="btnBackToCardContainer">Volver</a>
-//             </div>
-//         </div>`;
-//     containerHtml.append(divCard);
-// }

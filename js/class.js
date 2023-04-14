@@ -66,8 +66,8 @@ class KbSwitchUnit {
         review,
         image,
         id,
-        btnId,
-        btnDelId
+        btnDetail,
+        btnAddCart
     ) {
         this.name = name;
         this.type = type;
@@ -82,19 +82,78 @@ class KbSwitchUnit {
         this.rating = parseInt(rating);
         this.id = parseInt(id);
         this.image = image;
-        this.btnId = btnId;
-        this.btnDelId = btnDelId;
+        this.btnDetail = btnDetail;
+        this.btnAddCart = btnAddCart;
     }
     assignId(array) {
         this.id = newId(array);
-        this.btnId = `btnDetail${this.id}`;
-        this.btnDelId = `btnDelete${this.id}`;
+        this.btnDetail = `btnDetail${this.id}`;
+        this.btnAddCart = `btnAddCart${this.id}`;
     }
     addReview(review) {
         this.review = review;
     }
     addRating() {
         this.rating = rating;
+    }
+
+    assignImage(url) {
+        if (url == "") {
+            this.image = "./img/no-image-svgrepo-com.svg";
+        } else {
+            this.image = url;
+        }
+    }
+}
+
+class KbSwitchUnitCart {
+    constructor(
+        name,
+        type,
+        topHousing,
+        bottomHousing,
+        stem,
+        spring,
+        factoryLubed,
+        unitPrice,
+        quantity,
+        rating,
+        review,
+        image,
+        id,
+        totalPrice
+    ) {
+        this.name = name;
+        this.type = type;
+        this.topHousing = topHousing;
+        this.bottomHousing = bottomHousing;
+        this.stem = stem;
+        this.spring = spring;
+        this.factoryLubed = factoryLubed;
+        this.unitPrice = parseFloat(unitPrice);
+        this.quantity = parseInt(quantity);
+        this.review = review;
+        this.rating = parseInt(rating);
+        this.id = parseInt(id);
+        this.image = image;
+        this.id = id;
+        // this.btnDetail = btnDetail;
+        // this.btnAddCart = btnAddCart;
+        this.totalPrice = totalPrice;
+    }
+    // assignId(array) {
+    //     this.id = newId(array);
+    //     this.btnDetail = `btnDetail${this.id}`;
+    //     this.btnDelId = `btnDelete${this.id}`;
+    // }
+    // addReview(review) {
+    //     this.review = review;
+    // }
+    // addRating() {
+    //     this.rating = rating;
+    // }
+    calcTotal() {
+        this.totalPrice = this.unitPrice * this.quantity;
     }
 
     assignImage(url) {
