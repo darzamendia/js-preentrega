@@ -286,7 +286,7 @@ function addMarketCardbtnAddCart(array, containerHtml) {
             // setMarketContainer(kbSwitchMarket, mainContainer);
 
             // setMarketItems(kbSwitchMarket, mainContainer);
-            updateMarketItems(kbSwitchMarket, newUnit);
+            updateMarketItems(newUnit);
 
             // saveStorage(kbSwitchReviews);
             // }
