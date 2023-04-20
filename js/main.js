@@ -3,7 +3,7 @@ window.onload = () => {
     if (usuarioStorage) {
         for (const element of usuarioStorage) {
             kbSwitchReviews.push(element);
-            createCard(usuarioStorage, cardContainer);
+            // createCard(usuarioStorage, cardContainer);
         }
     }
 };

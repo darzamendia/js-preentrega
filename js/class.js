@@ -121,7 +121,8 @@ class KbSwitchUnitCart {
         review,
         image,
         id,
-        totalPrice
+        totalPrice,
+        idDelete
     ) {
         this.name = name;
         this.type = type;
@@ -136,16 +137,16 @@ class KbSwitchUnitCart {
         this.rating = parseInt(rating);
         this.id = parseInt(id);
         this.image = image;
-        this.id = id;
         // this.btnDetail = btnDetail;
         // this.btnAddCart = btnAddCart;
         this.totalPrice = totalPrice;
+        this.idDelete = idDelete;
     }
-    // assignId(array) {
-    //     this.id = newId(array);
-    //     this.btnDetail = `btnDetail${this.id}`;
-    //     this.btnDelId = `btnDelete${this.id}`;
-    // }
+    assignId() {
+        //     this.id = newId(array);
+        this.idDelete = `btnDelete${this.id}`;
+        //     this.btnDelId = `btnDelete${this.id}`;
+    }
     // addReview(review) {
     //     this.review = review;
     // }

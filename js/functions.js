@@ -1,22 +1,22 @@
 let kbSwitchReviews = [];
 
-const switchName = document.getElementById("inputSwitchName");
-const switchType = document.getElementById("selectType");
-const switchTopHousing = document.getElementById("selectTopHousing");
-const switchBottomHousing = document.getElementById("selectBottomHousing");
-const switchStem = document.getElementById("selectStem");
-const switchSpring = document.getElementById("inputSpring");
-const switchUrlImage = document.getElementById("inputUrlImage");
-const switchRating = document.getElementById("selectRating");
-const textAreaReview = document.getElementById("textAreaReview");
-const btnAddSwitch = document.getElementById("btnAddSwitch");
-const cardContainer = document.getElementById("cardContainer");
-const checkFactoryLubed = document.getElementById("checkFactoryLubed");
-const btnUploadDefault = document.getElementById("btnUploadDefault");
-const btnClearList = document.getElementById("btnClearList");
-const kbSwitchDetail = document.getElementById("kbSwitchDetail");
-const selectCriteria = document.getElementById("selectCriteria");
-const inputSearch = document.getElementById("inputSearch");
+// const switchName = document.getElementById("inputSwitchName");
+// const switchType = document.getElementById("selectType");
+// const switchTopHousing = document.getElementById("selectTopHousing");
+// const switchBottomHousing = document.getElementById("selectBottomHousing");
+// const switchStem = document.getElementById("selectStem");
+// const switchSpring = document.getElementById("inputSpring");
+// const switchUrlImage = document.getElementById("inputUrlImage");
+// const switchRating = document.getElementById("selectRating");
+// const textAreaReview = document.getElementById("textAreaReview");
+// const btnAddSwitch = document.getElementById("btnAddSwitch");
+// const cardContainer = document.getElementById("cardContainer");
+// const checkFactoryLubed = document.getElementById("checkFactoryLubed");
+// const btnUploadDefault = document.getElementById("btnUploadDefault");
+// const btnClearList = document.getElementById("btnClearList");
+// const kbSwitchDetail = document.getElementById("kbSwitchDetail");
+// const selectCriteria = document.getElementById("selectCriteria");
+// const inputSearch = document.getElementById("inputSearch");
 
 function newId(array) {
     let keep = true;
@@ -80,11 +80,11 @@ function addUnitToCart(newUnit) {
     // }
     // console.log(`${kbSwitch.unitPrice} ${kbSwitch.quantity}`);
     kbSwitch.calcTotal();
+    kbSwitch.assignId();
     // console.log(kbSwitch.totalPrice);
     // kbSwitch.assignImage(switchUrlImage.value);
 
     kbSwitchCart.push(kbSwitch);
-    console.log(kbSwitchCart);
     // console.log()
     // kbSwitch.assignId(kbSwitchReviews);
 }
@@ -98,47 +98,47 @@ function clearStorage() {
     localStorage.clear();
 }
 
-function createCard(arrayElement, containerHtml) {
-    containerHtml.innerHTML = "";
-    for (const element of arrayElement) {
-        let divCard = document.createElement("div");
-        divCard.className = "col";
-        divCard.innerHTML = `<div class="col mb-4">
-                <div class="card h-100">
-                    <img src="${element.image}" class="card-img-top" alt="${element.name}">
-                    <div class="card-body">
-                        <h4 class="card-title">${element.name}</h4>
-                        <div class="d-grid gap-1 mx-auto">
-                            <a href="#kbSwitchDetail" class="btn btn-outline-dark btn-sm" id="btnDetail${element.id}">Detalle</a>
-                            <a href="#" class="btn btn-outline-dark btn-sm" id="btnDelete${element.id}">Descartar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-        containerHtml.append(divCard);
-        const btnDetail = document.getElementById(`btnDetail${element.id}`);
-        btnDetail.addEventListener("click", (e) => {
-            e.preventDefault();
-            let eTarget = e.target;
-            let switchFound = buscarSwitch(kbSwitchReviews, "btnId", eTarget.id);
-            createDetailContainer(switchFound, kbSwitchDetail);
-            document.getElementById("kbSwitchDetail").scrollIntoView();
-        });
-        const btnDelete = document.getElementById(`btnDelete${element.id}`);
-        btnDelete.addEventListener("click", (e) => {
-            e.preventDefault();
-            let eTarget = e.target;
-            let switchFound = buscarSwitch(kbSwitchReviews, "btnDelId", eTarget.id);
-            const newArray = kbSwitchReviews.filter((kbSwitch) => {
-                return kbSwitch.btnDelId !== switchFound.btnDelId;
-            });
-            kbSwitchReviews = newArray;
-            saveStorage(kbSwitchReviews);
-            createCard(kbSwitchReviews, cardContainer);
-            clearDetailContainer(switchFound.id);
-        });
-    }
-}
+// function createCard(arrayElement, containerHtml) {
+//     containerHtml.innerHTML = "";
+//     for (const element of arrayElement) {
+//         let divCard = document.createElement("div");
+//         divCard.className = "col";
+//         divCard.innerHT = `<div class="col mb-4">
+//                 <div class="card h-100">
+//                     <img src="${element.image}" class="card-img-top" alt="${element.name}">
+//                     <div class="card-body">
+//                         <h4 class="card-title">${element.name}</h4>
+//                         <div class="d-grid gap-1 mx-auto">
+//                             <a href="#kbSwitchDetail" class="btn btn-outline-dark btn-sm" id="btnDetail${element.id}">Detalle</a>
+//                             <a href="#" class="btn btn-outline-dark btn-sm" id="btnDelete${element.id}">Descartar</a>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>`;
+//         containerHtml.append(divCard);
+//         const btnDetail = document.getElementById(`btnDetail${element.id}`);
+//         btnDetail.addEventListener("click", (e) => {
+//             e.preventDefault();
+//             let eTarget = e.target;
+//             let switchFound = buscarSwitch(kbSwitchReviews, "btnId", eTarget.id);
+//             createDetailContainer(switchFound, kbSwitchDetail);
+//             document.getElementById("kbSwitchDetail").scrollIntoView();
+//         });
+//         const btnDelete = document.getElementById(`btnDelete${element.id}`);
+//         btnDelete.addEventListener("click", (e) => {
+//             e.preventDefault();
+//             let eTarget = e.target;
+//             let switchFound = buscarSwitch(kbSwitchReviews, "btnDelId", eTarget.id);
+//             const newArray = kbSwitchReviews.filter((kbSwitch) => {
+//                 return kbSwitch.btnDelId !== switchFound.btnDelId;
+//             });
+//             kbSwitchReviews = newArray;
+//             saveStorage(kbSwitchReviews);
+//             createCard(kbSwitchReviews, cardContainer);
+//             clearDetailContainer(switchFound.id);
+//         });
+//     }
+// }
 
 function clearDetailContainer(id) {
     const containerFound = document.getElementById(id);
@@ -212,111 +212,111 @@ function clearCardContainer(containerHtml) {
     containerHtml.innerHTML = "";
 }
 
-btnAddSwitch.addEventListener("click", (e) => {
-    e.preventDefault();
-    let valido = valInputs();
-    if (valido) {
-        registrarSwitch(kbSwitchReviews);
-        saveStorage(kbSwitchReviews);
-        createCard(kbSwitchReviews, cardContainer);
-        clearInputs();
-    }
-});
+// btnAddSwitch.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     let valido = valInputs();
+//     if (valido) {
+//         registrarSwitch(kbSwitchReviews);
+//         saveStorage(kbSwitchReviews);
+//         createCard(kbSwitchReviews, cardContainer);
+//         clearInputs();
+//     }
+// });
 
-function clearInputs() {
-    switchName.value = "";
-    switchType.value = "Seleccionar tipo...";
-    switchTopHousing.value = "Seleccionar material...";
-    switchBottomHousing.value = "Seleccionar material...";
-    switchStem.value = "Seleccionar material...";
-    switchSpring.value = "";
-    checkFactoryLubed.checked = false;
-    switchUrlImage.value = "";
-    textAreaReview.value = "";
-    switchRating.value = "Puntuación...";
-}
+// function clearInputs() {
+//     switchName.value = "";
+//     switchType.value = "Seleccionar tipo...";
+//     switchTopHousing.value = "Seleccionar material...";
+//     switchBottomHousing.value = "Seleccionar material...";
+//     switchStem.value = "Seleccionar material...";
+//     switchSpring.value = "";
+//     checkFactoryLubed.checked = false;
+//     switchUrlImage.value = "";
+//     textAreaReview.value = "";
+//     switchRating.value = "Puntuación...";
+// }
 
-function valInputs() {
-    let inputsOk = true;
-    if (switchName.value == "") {
-        switchName.style.border = "solid indianred";
-        inputsOk = false;
-        backToContainer("cardContainer");
-    } else {
-        switchName.style.border = "";
-    }
-    if (switchType.value == "Seleccionar tipo...") {
-        switchType.style.border = "solid indianred";
-        inputsOk = false;
-        backToContainer("cardContainer");
-    } else {
-        switchType.style.border = "";
-    }
-    if (switchTopHousing.value == "Seleccionar material...") {
-        switchTopHousing.style.border = "solid indianred";
-        inputsOk = false;
-        backToContainer("cardContainer");
-    } else {
-        switchTopHousing.style.border = "";
-    }
-    if (switchBottomHousing.value == "Seleccionar material...") {
-        switchBottomHousing.style.border = "solid indianred";
-        inputsOk = false;
-        backToContainer("cardContainer");
-    } else {
-        switchBottomHousing.style.border = "";
-    }
-    if (switchStem.value == "Seleccionar material...") {
-        switchStem.style.border = "solid indianred";
-        inputsOk = false;
-        backToContainer("cardContainer");
-    } else {
-        switchStem.style.border = "";
-    }
-    if (switchSpring.value == "" || isNaN(switchSpring.value)) {
-        switchSpring.style.border = "solid indianred";
-        inputsOk = false;
-        backToContainer("cardContainer");
-    } else {
-        switchSpring.style.border = "";
-    }
-    return inputsOk;
-}
+// function valInputs() {
+//     let inputsOk = true;
+//     if (switchName.value == "") {
+//         switchName.style.border = "solid indianred";
+//         inputsOk = false;
+//         backToContainer("cardContainer");
+//     } else {
+//         switchName.style.border = "";
+//     }
+//     if (switchType.value == "Seleccionar tipo...") {
+//         switchType.style.border = "solid indianred";
+//         inputsOk = false;
+//         backToContainer("cardContainer");
+//     } else {
+//         switchType.style.border = "";
+//     }
+//     if (switchTopHousing.value == "Seleccionar material...") {
+//         switchTopHousing.style.border = "solid indianred";
+//         inputsOk = false;
+//         backToContainer("cardContainer");
+//     } else {
+//         switchTopHousing.style.border = "";
+//     }
+//     if (switchBottomHousing.value == "Seleccionar material...") {
+//         switchBottomHousing.style.border = "solid indianred";
+//         inputsOk = false;
+//         backToContainer("cardContainer");
+//     } else {
+//         switchBottomHousing.style.border = "";
+//     }
+//     if (switchStem.value == "Seleccionar material...") {
+//         switchStem.style.border = "solid indianred";
+//         inputsOk = false;
+//         backToContainer("cardContainer");
+//     } else {
+//         switchStem.style.border = "";
+//     }
+//     if (switchSpring.value == "" || isNaN(switchSpring.value)) {
+//         switchSpring.style.border = "solid indianred";
+//         inputsOk = false;
+//         backToContainer("cardContainer");
+//     } else {
+//         switchSpring.style.border = "";
+//     }
+//     return inputsOk;
+// }
 
 function backToContainer(container) {
     document.getElementById(container).scrollIntoView();
 }
 // "cardContainer"
 
-btnUploadDefault.addEventListener("click", (e) => {
-    e.preventDefault();
-    registrarSwitchDefault(kbSwitchReviews);
-    saveStorage(kbSwitchReviews);
-    createCard(kbSwitchReviews, cardContainer);
-});
+// btnUploadDefault.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     registrarSwitchDefault(kbSwitchReviews);
+//     saveStorage(kbSwitchReviews);
+//     createCard(kbSwitchReviews, cardContainer);
+// });
 
-btnClearList.addEventListener("click", (e) => {
-    e.preventDefault();
-    clearCardContainer(cardContainer);
-    clearStorage();
-    const containerFound = document.getElementById("kbSwitchDetail");
-    if (containerFound) {
-        containerFound.innerHTML = "";
-    }
-});
+// btnClearList.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     clearCardContainer(cardContainer);
+//     clearStorage();
+//     const containerFound = document.getElementById("kbSwitchDetail");
+//     if (containerFound) {
+//         containerFound.innerHTML = "";
+//     }
+// });
 
-inputSearch.addEventListener("input", () => {
-    let criterio = selectCriteria.value;
-    if (criterio == "Filtrar listado...") {
-        selectCriteria.style.border = "solid indianred";
-        inputSearch.value = "";
-    } else {
-        selectCriteria.style.border = "";
-        let chain = inputSearch.value.toUpperCase();
-        let kbSwitchesFiltered = filterList(kbSwitchReviews, criterio, chain);
-        createCard(filterList(kbSwitchReviews, criterio, chain), cardContainer);
-    }
-});
+// inputSearch.addEventListener("input", () => {
+//     let criterio = selectCriteria.value;
+//     if (criterio == "Filtrar listado...") {
+//         selectCriteria.style.border = "solid indianred";
+//         inputSearch.value = "";
+//     } else {
+//         selectCriteria.style.border = "";
+//         let chain = inputSearch.value.toUpperCase();
+//         let kbSwitchesFiltered = filterList(kbSwitchReviews, criterio, chain);
+//         createCard(filterList(kbSwitchReviews, criterio, chain), cardContainer);
+//     }
+// });
 
 const defaultSwitchList = [];
 
