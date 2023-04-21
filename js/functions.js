@@ -56,7 +56,7 @@ function registrarSwitch() {
     kbSwitch.assignId(kbSwitchReviews);
 }
 
-function addUnitToCart(newUnit) {
+function addUnitToCart(newUnit, quantity) {
     const kbSwitch = new KbSwitchUnitCart(
         newUnit.name,
         newUnit.type,
@@ -66,7 +66,7 @@ function addUnitToCart(newUnit) {
         newUnit.spring,
         newUnit.factoryLubed,
         newUnit.unitPrice,
-        newUnit.unitStock,
+        quantity,
         "",
         "",
         newUnit.image,
@@ -97,48 +97,6 @@ function clearStorage() {
     kbSwitchReviews = [];
     localStorage.clear();
 }
-
-// function createCard(arrayElement, containerHtml) {
-//     containerHtml.innerHTML = "";
-//     for (const element of arrayElement) {
-//         let divCard = document.createElement("div");
-//         divCard.className = "col";
-//         divCard.innerHT = `<div class="col mb-4">
-//                 <div class="card h-100">
-//                     <img src="${element.image}" class="card-img-top" alt="${element.name}">
-//                     <div class="card-body">
-//                         <h4 class="card-title">${element.name}</h4>
-//                         <div class="d-grid gap-1 mx-auto">
-//                             <a href="#kbSwitchDetail" class="btn btn-outline-dark btn-sm" id="btnDetail${element.id}">Detalle</a>
-//                             <a href="#" class="btn btn-outline-dark btn-sm" id="btnDelete${element.id}">Descartar</a>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>`;
-//         containerHtml.append(divCard);
-//         const btnDetail = document.getElementById(`btnDetail${element.id}`);
-//         btnDetail.addEventListener("click", (e) => {
-//             e.preventDefault();
-//             let eTarget = e.target;
-//             let switchFound = buscarSwitch(kbSwitchReviews, "btnId", eTarget.id);
-//             createDetailContainer(switchFound, kbSwitchDetail);
-//             document.getElementById("kbSwitchDetail").scrollIntoView();
-//         });
-//         const btnDelete = document.getElementById(`btnDelete${element.id}`);
-//         btnDelete.addEventListener("click", (e) => {
-//             e.preventDefault();
-//             let eTarget = e.target;
-//             let switchFound = buscarSwitch(kbSwitchReviews, "btnDelId", eTarget.id);
-//             const newArray = kbSwitchReviews.filter((kbSwitch) => {
-//                 return kbSwitch.btnDelId !== switchFound.btnDelId;
-//             });
-//             kbSwitchReviews = newArray;
-//             saveStorage(kbSwitchReviews);
-//             createCard(kbSwitchReviews, cardContainer);
-//             clearDetailContainer(switchFound.id);
-//         });
-//     }
-// }
 
 function clearDetailContainer(id) {
     const containerFound = document.getElementById(id);

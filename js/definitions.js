@@ -2,7 +2,7 @@ const logos = [];
 let kbSwitchMarket = [];
 let kbSwitchCart = [];
 
-const mainContainer = document.getElementById("mainContainer");
+let mainContainer = document.getElementById("mainContainer");
 
 const btnNavHome = document.getElementById("btnNavHome");
 const btnNavMarket = document.getElementById("btnNavMarket");
@@ -68,6 +68,7 @@ btnLogoVerde.addEventListener("click", (e) => {
 btnNavHome.addEventListener("click", (e) => {
     e.preventDefault();
     emptyElement(mainContainer);
+    setHomeContainer(mainContainer);
 });
 
 btnNavMarket.addEventListener("click", (e) => {
@@ -80,7 +81,52 @@ btnNavCart.addEventListener("click", (e) => {
     e.preventDefault();
     emptyElement(mainContainer);
     setCartContainer(kbSwitchCart, mainContainer);
+    if (kbSwitchCart.length != 0) {
+        addFinalizeBtn(mainContainer);
+    } else {
+        emptyCartImg(mainContainer, "./img/emptycart.svg");
+    }
 });
+
+function setHomeContainer(container) {
+    let homeContainer = document.createElement("div");
+    homeContainer.innerHTML = `
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./img/logo-lavander.svg" class="rounded mx-auto d-block carruselImage" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="./img/logo-red.svg" class="rounded mx-auto d-block carruselImage" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="./img/logo-green.svg" class="rounded mx-auto d-block carruselImage" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>`;
+    console.log(homeContainer);
+    container.append(homeContainer);
+}
+
+function emptyCartImg(container, imageUrl) {
+    let divImgCnt = document.createElement("div");
+    divImgCnt.className = "text-center";
+    divImgCnt.innerHTML = `
+        <img src="${imageUrl}" class="rounded mx-auto d-block emptyCartImg" alt="Carrito vacío">
+        <h1 class="display-5 fw-bold">El carrito está vacío</h1>
+        <p class="fs-5 mb-4">En nuestra tienda encontrarás los switches disponibles!</p>`;
+    container.append(divImgCnt);
+}
 
 function emptyElement(element) {
     element.innerHTML = "";
@@ -156,19 +202,6 @@ function addMarketSearchInput(element) {
     });
 }
 
-// inputSearch.addEventListener("input", () => {
-//     let criterio = selectCriteria.value;
-//     if (criterio == "Filtrar listado...") {
-//         selectCriteria.style.border = "solid indianred";
-//         inputSearch.value = "";
-//     } else {
-//         selectCriteria.style.border = "";
-//         let chain = inputSearch.value.toUpperCase();
-//         // let kbSwitchesFiltered = filterList(kbSwitchReviews, criterio, chain);
-//         createCard(filterList(kbSwitchReviews, criterio, chain), cardContainer);
-//     }
-// });
-
 function setMarketItems(array, containerHtml) {
     let divCardContainer = document.createElement("div");
     let divCardLayout = document.createElement("div");
@@ -179,14 +212,30 @@ function setMarketItems(array, containerHtml) {
     divCardContainer.append(divCardLayout);
     containerHtml.append(divCardContainer);
     addMarketCardBtnDetail(array);
-    addMarketCardbtnAddCart(array, containerHtml);
+    addMarketCardbtnAddCart(array);
+    addMarketQuantityInput(array);
+}
+
+function addMarketQuantityInput(array) {
+    array.forEach((element) => {
+        const inputQuantity = document.getElementById(`quantity${element.id}`);
+        if (inputQuantity) {
+            inputQuantity.addEventListener("click", (e) => {
+                e.preventDefault();
+                if (inputQuantity.value > element.unitStock) {
+                    inputQuantity.value = element.unitStock;
+                } else if (inputQuantity.value < 0) {
+                    inputQuantity.value = 0;
+                }
+                console.log(inputQuantity.value);
+            });
+        }
+    });
 }
 
 function updateMarketItems(unit) {
     let unitStock = document.getElementById(`stockId${unit.id}`);
-    console.log(unitStock.innerHTML);
     unitStock.innerHTML = `Stock: ${unit.unitStock}u.`;
-    console.log(unitStock.innerHTML);
 }
 
 function setMarketDetail(containerHtml) {
@@ -198,22 +247,22 @@ function setMarketDetail(containerHtml) {
 
 function setCartItems(array, containerHtml) {
     let divCardContainer = document.createElement("div");
-    // let divCardLayout = document.createElement("div");
-    let divUnitDetailContainer = document.createElement("div");
     divCardContainer.className = "container";
-    // divCardLayout.className = "row row-cols-1 row-cols-lg-4 row-cols-md-3 g-4";
+    divCardContainer.id = "cartList";
     addCartCard(array, divCardContainer);
-    // divCardContainer.append(divCardLayout);
     containerHtml.append(divCardContainer);
-    // addMarketCardBtnDetail(array);
-    // addMarketCardbtnAddCart(array);
-    // Meter Container detail en fn. addMarketDetailContainer
-    divUnitDetailContainer.id = "cntMarketUnitDetail";
-    divUnitDetailContainer.className = "p-3 position-relative overflow-hidden text-center bg-light";
-    containerHtml.append(divUnitDetailContainer);
-
     addCartCardBtnDelete(array);
     //
+}
+
+function addFinalizeBtn(container) {
+    let divBtn = document.createElement("div");
+    divBtn.className = "py-3";
+    divBtn.innerHTML = `
+        <div class="d-grid gap-2 col-4 mx-auto">
+            <button id="btnInitBuy" class="btn btn-outline-dark" type="button">Iniciar compra</button>
+        </div>`;
+    container.append(divBtn);
 }
 
 function addMarketCard(array, container) {
@@ -222,13 +271,18 @@ function addMarketCard(array, container) {
         divCard.className = "col";
         divCard.innerHTML = `
         <div class="card h-100">
-            <img src="${element.image}" class="card-img-top" alt="...">
             <div class="card-body">
+                <img src="${element.image}" class="card-img-top" alt="...">
                 <h5 class="card-title">${element.name}</h5>
                 <h6>Precio: $${element.unitPrice}</h6>
                 <p id="stockId${element.id}">Stock: ${element.unitStock}u.</p>
-                <div class="d-grid gap-1 mx-auto">
-                    <a href="#" class="btn btn-outline-dark btn-sm" id="${element.btnDetail}">Detalle</a>
+                <a href="#" class="btn btn-link" data-mdb-ripple-color="dark" id="${element.btnDetail}">Detalle</a>
+                <div class="form-outline">
+                    <input min="0" max="${element.unitStock}" type="number" id="quantity${element.id}" class="form-control" value="0"/>
+                    <label class="form-label" for="quantity${element.id}">Cantidad</label>
+                </div>
+                
+                <div class="d-grid gap-2 col-9 mx-auto py-2">
                     <a href="#" class="btn btn-outline-dark btn-sm" id="${element.btnAddCart}">Agregar al carrito</a>
                 </div>
             </div>
@@ -257,39 +311,35 @@ function addCartCard(array, container) {
 function addMarketCardBtnDetail(array) {
     array.forEach((element) => {
         const btnDetail = document.getElementById(element.btnDetail);
-        btnDetail.addEventListener("click", (e) => {
-            e.preventDefault();
-            let unitFound = buscarSwitch(kbSwitchMarket, "btnDetail", e.target.id);
-            let cntchange = document.getElementById("cntMarketUnitDetail");
-            createDetailContainer(unitFound, cntchange);
-            document.getElementById("cntMarketUnitDetail").scrollIntoView();
-        });
+        if (btnDetail) {
+            btnDetail.addEventListener("click", (e) => {
+                e.preventDefault();
+                let unitFound = buscarSwitch(kbSwitchMarket, "btnDetail", e.target.id);
+                let cntchange = document.getElementById("cntMarketUnitDetail");
+                createDetailContainer(unitFound, cntchange);
+                document.getElementById("cntMarketUnitDetail").scrollIntoView();
+            });
+        }
     });
 }
 
-function addMarketCardbtnAddCart(array, containerHtml) {
+function addMarketCardbtnAddCart(array) {
     array.forEach((element) => {
         const btnAddCart = document.getElementById(element.btnAddCart);
         btnAddCart.addEventListener("click", (e) => {
             e.preventDefault();
             let newUnit = buscarSwitch(kbSwitchMarket, "btnAddCart", e.target.id);
             let cartUnit = buscarSwitch(kbSwitchCart, "id", newUnit.id);
-
+            let quantityInput = document.getElementById(`quantity${newUnit.id}`);
             if (cartUnit) {
-                cartUnit.quantity += newUnit.unitStock;
+                cartUnit.quantity += parseInt(quantityInput.value);
+                console.log(cartUnit.quantity);
                 cartUnit.calcTotal();
             } else {
-                addUnitToCart(newUnit);
+                addUnitToCart(newUnit, quantityInput.value);
             }
-            newUnit.unitStock -= newUnit.unitStock;
-            // emptyElement(containerHtml);
-            // setMarketContainer(kbSwitchMarket, mainContainer);
-
-            // setMarketItems(kbSwitchMarket, mainContainer);
+            newUnit.unitStock -= quantityInput.value;
             updateMarketItems(newUnit);
-
-            // saveStorage(kbSwitchReviews);
-            // }
         });
     });
 }
@@ -301,16 +351,26 @@ function addCartCardBtnDelete(array) {
             e.preventDefault();
             let selectedUnit = buscarSwitch(kbSwitchCart, "idDelete", e.target.id);
             let marketUnit = buscarSwitch(kbSwitchMarket, "id", selectedUnit.id);
-            console.log();
             marketUnit.unitStock += selectedUnit.quantity;
             const newArray = kbSwitchCart.filter((kbSwitch) => {
                 return kbSwitch.idDelete !== selectedUnit.idDelete;
             });
             kbSwitchCart = newArray;
-            emptyElement(mainContainer);
-            setCartContainer(kbSwitchCart, mainContainer);
+            if (kbSwitchCart.length != 0) {
+                let cartListCnt = document.getElementById("cartList");
+                emptyElement(cartList);
+                updateCartList(kbSwitchCart, cartList);
+            } else {
+                emptyElement(mainContainer);
+                emptyCartImg(mainContainer, "./img/emptycart.svg");
+            }
         });
     });
+}
+
+function updateCartList(array, container) {
+    addCartCard(array, container);
+    addCartCardBtnDelete(array);
 }
 
 function addMarketCardDetailbtn(element) {
@@ -318,7 +378,6 @@ function addMarketCardDetailbtn(element) {
     if (btnDetail) {
         btnDetail.addEventListener("click", (e) => {
             e.preventDefault();
-            // console.log(e.target);
             let eTarget = e.target;
             // let switchFound = buscarSwitch(kbSwitchReviews, "btnId", eTarget.id);
             // createDetailContainer(switchFound, kbSwitchDetail);

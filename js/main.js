@@ -6,4 +6,6 @@ window.onload = () => {
             // createCard(usuarioStorage, cardContainer);
         }
     }
+    emptyElement(mainContainer);
+    setHomeContainer(mainContainer);
 };
