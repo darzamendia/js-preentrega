@@ -1,90 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
+function fillCartList() {
+    kbSwitchCart = [];
+    let cartStorage = JSON.parse(localStorage.getItem("cart"));
+    if (cartStorage) {
+        uploadCartStorage(cartStorage);
+    }
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
-    </body>
-    <script defer src="./js/class.js"></script>
-    <script defer src="./js/definitions.js"></script>
-    <script defer src="./js/functions.js"></script>
-    <script defer src="./js/defaultdata.js"></script>
-    <script defer src="./js/market.js"></script>
-    <script defer src="./js/cart.js"></script>
-    <script defer src="./js/main.js"></script>
-    <link rel="stylesheet" href="./css/style.css">
-    <title>Keeb me! (Pre-entrega 3)</title>
-</head>
-<!--
-    Agregar:
-    1. Market - Ok
-    2. Cart - Ok
-    3. Finalización de compra
-    4. Reset al finalizar
-    5. Home - Ok
--->
+function uploadCartStorage(array) {
+    array.forEach((element) => {
+        kbSwitchCart.push(
+            new KbSwitchUnitCart(
+                element.name,
+                element.type,
+                element.topHousing,
+                element.bottomHousing,
+                element.stem,
+                element.spring,
+                element.factoryLubed,
+                element.unitPrice,
+                element.quantity,
+                element.rating,
+                element.review,
+                element.image,
+                element.id,
+                element.totalPrice,
+                element.idDelete
+            )
+        );
+    });
+}
 
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="./img/logo-lavander.svg" alt="Logo" width="30" height="24" id="navLogo"
-                    class="d-inline-block align-text-top">
-                Keeb me!
-            </a>
-            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse  justify-content-end me-auto collapse" id="navbarColor01">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" id="btnNavHome" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="btnNavMarket" href="#">Tienda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="btnNavCart" href="#">Carrito</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Cambiar color
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" id="btnLogoLavanda" href="#">Lavanda</a></li>
-                            <li><a class="dropdown-item" id="btnLogoRojo" href="#">Rojo</a></li>
-                            <li><a class="dropdown-item" id="btnLogoVerde" href="#">Verde</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+function setCartContainer(array, element) {
+    createCartCard(array, element);
+}
 
+function createCartCard(arrayElement, containerHtml) {
+    // setMarketSearcher(containerHtml);
+    setCartItems(arrayElement, containerHtml);
+}
 
-    <main>
-        <div class="container">
-            <div class="py-3 text-center">
-                <img class="d-block mx-auto mb-4 mainLogo" src="./img/logo-lavander.svg" alt="Keyboard Logo"
-                    id="mainLogo">
-                <h1>Keeb me!</h1>
-                <p class="lead">(Pre-entrega 3 - Coderhouse - JavaScript)</p>
-            </div>
-            <div class="container" id="mainContainer">
-            </div>
-            <!-- <div class="row g-5">
+function setCartItems(array, containerHtml) {
+    let divCardContainer = document.createElement("div");
+    divCardContainer.className = "container";
+    divCardContainer.id = "cartList";
+    addCartCard(array, divCardContainer);
+    containerHtml.append(divCardContainer);
+    addCartCardBtnDelete(array);
+    //
+}
+
+function addCartCard(array, container) {
+    let divCard = document.createElement("ol");
+    divCard.className = "list-group";
+    for (const element of array) {
+        divCard.innerHTML += `
+            <ul class="list-group-item d-flex justify-content-between align-items-start">
+                <button type="button" class="btn btn-outline-danger btn-sm" id="${element.idDelete}">Eliminar</button>
+                <img src="${element.image}" class="cartImage" alt="${element.name}">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">${element.name}</div>
+                    $${element.unitPrice} x ${element.quantity}u.
+                </div>
+                <h5>$${element.totalPrice}</h5>
+            </ul>`;
+        container.append(divCard);
+    }
+}
+
+function addInitBuyBtn(container) {
+    let divBtn = document.createElement("div");
+    divBtn.className = "py-3";
+    divBtn.innerHTML = `
+        <div class="d-grid gap-2 col-4 mx-auto">
+            <button id="btnInitBuy" class="btn btn-outline-dark" type="button">Iniciar compra</button>
+        </div>`;
+    container.append(divBtn);
+    addInitBuyFn(container);
+}
+
+function addInitBuyFn(container) {
+    const buyBtn = document.getElementById("btnInitBuy");
+    if (buyBtn) {
+        buyBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            addCheckOut(container);
+        });
+    }
+}
+
+function addCartCardBtnDelete(array) {
+    array.forEach((element) => {
+        const btnDeleteCartItem = document.getElementById(element.idDelete);
+        btnDeleteCartItem.addEventListener("click", (e) => {
+            e.preventDefault();
+            let selectedUnit = buscarSwitch(kbSwitchCart, "idDelete", e.target.id);
+            let marketUnit = buscarSwitch(kbSwitchMarket, "id", selectedUnit.id);
+            marketUnit.unitStock += selectedUnit.quantity;
+            const newArray = kbSwitchCart.filter((kbSwitch) => {
+                return kbSwitch.idDelete !== selectedUnit.idDelete;
+            });
+            kbSwitchCart = newArray;
+            if (kbSwitchCart.length != 0) {
+                let cartListCnt = document.getElementById("cartList");
+                emptyElement(cartList);
+                updateCartList(kbSwitchCart, cartList);
+            } else {
+                emptyElement(mainContainer);
+                emptyCartImg(mainContainer, "./img/emptycart.svg");
+            }
+            saveStorage("market", kbSwitchMarket);
+            saveStorage("cart", kbSwitchCart);
+        });
+    });
+}
+
+function updateCartList(array, container) {
+    addCartCard(array, container);
+    addCartCardBtnDelete(array);
+}
+
+function addCheckOut(container) {
+    console.log("Agregar checkout");
+    let newDiv = document.createElement("div");
+    newDiv.innerHTML = `
+    <div class="row g-5">
                 <div class="col-md-5 col-lg-4 order-md-last">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-primary">Tu carrito</span>
@@ -230,9 +269,6 @@
                         <button class="w-100 btn btn-outline-dark btn-lg" type="submit">Confirmar pago</button>
                     </form>
                 </div>
-            </div>; -->
-        </div>
-    </main>
-</body>
-
-</html>
+            </div>`;
+    container.append(newDiv);
+}

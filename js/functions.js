@@ -89,8 +89,8 @@ function addUnitToCart(newUnit, quantity) {
     // kbSwitch.assignId(kbSwitchReviews);
 }
 
-function saveStorage(kbSwitchReviews) {
-    localStorage.setItem("reviewSwitches", JSON.stringify(kbSwitchReviews));
+function saveStorage(key, array) {
+    localStorage.setItem(key, JSON.stringify(array));
 }
 
 function clearStorage() {
