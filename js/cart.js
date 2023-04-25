@@ -1,5 +1,6 @@
 function fillCartList() {
     kbSwitchCart = [];
+    console.log(kbSwitchCart);
     let cartStorage = JSON.parse(localStorage.getItem("cart"));
     if (cartStorage) {
         uploadCartStorage(cartStorage);
@@ -271,4 +272,7 @@ function addCheckOut(container) {
                 </div>
             </div>`;
     container.append(newDiv);
+    addCheckoutFn();
 }
+
+function addCheckoutFn() {}
