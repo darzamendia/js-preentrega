@@ -116,7 +116,6 @@ function setHomeContainer(container) {
                 <span class="visually-hidden">Next</span>
             </button>
         </div>`;
-    console.log(homeContainer);
     container.append(homeContainer);
 }
 

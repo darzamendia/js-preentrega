@@ -1,6 +1,5 @@
 function fillCartList() {
     kbSwitchCart = [];
-    console.log(kbSwitchCart);
     let cartStorage = JSON.parse(localStorage.getItem("cart"));
     if (cartStorage) {
         uploadCartStorage(cartStorage);
@@ -121,45 +120,20 @@ function updateCartList(array, container) {
 }
 
 function addCheckOut(container) {
-    console.log("Agregar checkout");
     let newDiv = document.createElement("div");
     newDiv.innerHTML = `
+
     <div class="row g-5">
                 <div class="col-md-5 col-lg-4 order-md-last">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-primary">Tu carrito</span>
-                        <span class="badge bg-primary rounded-pill">3</span>
+                        <span class="badge bg-primary rounded-pill" id="checkOutTotalItem"></span>
                     </h4>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0">Product name</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0">Second product</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$8</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0">Third item</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div>
-                            <span class="text-muted">$5</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span>Total (USD)</span>
-                            <strong>$20</strong>
-                        </li>
+                    <ul class="list-group mb-3" id="checkOutItemList">
                     </ul>
                 </div>
                 <div class="col-md-7 col-lg-8">
-                    <h4 class="mb-3">Billing address</h4>
+                    <h4 class="mb-3">Datos de facturación</h4>
                     <form class="needs-validation" novalidate="">
                         <div class="row g-3">
                             <div class="col-sm-6">
@@ -180,25 +154,31 @@ function addCheckOut(container) {
                             <div class="col-12">
                                 <label for="email" class="form-label">Email <span
                                         class="text-muted">(Opcional)</span></label>
-                                <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                                <input type="email" class="form-control" id="email" placeholder="correo@dominio.com">
                                 <div class="invalid-feedback">
                                     Please enter a valid email address for shipping updates.
                                 </div>
                             </div>
                             <div class="col-12">
                                 <label for="domicilio" class="form-label">Domicilio</label>
-                                <input type="text" class="form-control" id="domicilio" placeholder="1234 Main St"
+                                <input type="text" class="form-control" id="domicilio" placeholder="Ingresar..."
                                     required="">
                                 <div class="invalid-feedback">
                                     Please enter your shipping address.
                                 </div>
                             </div>
                             <div class="col-md-5">
-                                <label for="'pais'" class="form-label">País</label>
+                            <div class="mb-3">
+                            <fieldset disabled>
+
+      <label for="'pais'" class="form-label">País</label>
                                 <select class="form-select" id="'pais'" required="">
-                                    <option value="">Ingresar...</option>
-                                    <option>United States</option>
+                                    <option value="">Argentina</option>
                                 </select>
+      </fieldset>
+
+    </div>
+                                
                                 <div class="invalid-feedback">
                                     Please select a valid 'pais'.
                                 </div>
@@ -207,7 +187,6 @@ function addCheckOut(container) {
                                 <label for="provincia" class="form-label">Provincia</label>
                                 <select class="form-select" id="provincia" required="">
                                     <option value="">Ingresar...</option>
-                                    <option>California</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     Please provide a valid provincia.
@@ -267,12 +246,128 @@ function addCheckOut(container) {
                             </div>
                         </div>
                         <hr class="my-4">
-                        <button class="w-100 btn btn-outline-dark btn-lg" type="submit">Confirmar pago</button>
+                        <button class="w-100 btn btn-outline-dark btn-lg" id="btnPayment" type="submit">Confirmar pago</button>
                     </form>
                 </div>
             </div>`;
     container.append(newDiv);
+    addCheckOutTotal(kbSwitchCart);
+    addProvincesDropdown("provincia");
+    addCheckOutItems(kbSwitchCart);
     addCheckoutFn();
 }
 
-function addCheckoutFn() {}
+function addCheckOutTotal(array) {
+    let totalItems = document.getElementById("checkOutTotalItem");
+    totalItems ? (totalItems.innerHTML = `${array.length}`) : console.error("Error");
+}
+
+function addCheckOutItems(array) {
+    let total = 0;
+    let checkOutItemsCnt = document.getElementById("checkOutItemList");
+    if (checkOutItemsCnt) {
+        array.forEach((element) => {
+            let liUnit = document.createElement("li");
+            liUnit.className = "list-group-item d-flex justify-content-between lh-sm";
+            liUnit.innerHTML = `
+                <div>
+                    <h6 class="my-0">${element.name}</h6>
+                    <small class="text-muted">x ${element.quantity}</small>
+                </div>
+                <span class="text-muted">$${element.totalPrice}</span>`;
+            checkOutItemsCnt.append(liUnit);
+            total += element.totalPrice;
+        });
+        let liTotal = document.createElement("li");
+        liTotal.className = "list-group-item d-flex justify-content-between";
+        liTotal.innerHTML = `
+            <span>Total a pagar</span>
+            <strong>$${total}</strong>`;
+        checkOutItemsCnt.append(liTotal);
+    }
+}
+
+function addProvincesDropdown(containerId) {
+    let provinceCnt = document.getElementById(containerId);
+    const provincesPromise = getProvinces();
+    provincesPromise.then((promise) => {
+        promise.provincias.sort((a, b) => a.id - b.id);
+        promise.provincias.forEach((element) => {
+            let option = document.createElement("option");
+            option.value = element.nombre;
+            option.innerHTML = element.nombre;
+            provinceCnt.append(option);
+        });
+    });
+}
+
+// function addProvinces(container, promise) {
+//     if (container) {
+//         promise.then(() => {
+//             promise.provincias.forEach((provincia) => {
+//                 console.log(provincia.nombre);
+//             });
+//         });
+//     }
+// }
+
+function getProvinces() {
+    return fetch("https://apis.datos.gob.ar/georef/api/provincias")
+        .then((response) => response.json())
+        .then((json) => json);
+}
+
+function addCheckoutFn() {
+    addPaymentBtn();
+    // let inputName = document.getElementById("nombre");
+}
+
+function addPaymentBtn() {
+    let btnPayment = document.getElementById("btnPayment");
+    let checked = 0;
+    btnPayment.addEventListener("click", (e) => {
+        checked = 0;
+        e.preventDefault();
+        checked += checkInputContent("nombre");
+        checked += checkInputContent("apellido");
+        checked += checkInputContent("domicilio");
+        checked += checkInputContent("provincia");
+        checked += checkInputContent("codigoPostal");
+        checked += checkInputContent("cc-name");
+        checked += checkInputContent("cc-number");
+        checked += checkInputContent("cc-expiration");
+        checked += checkInputContent("cc-cvv");
+        checked == 0 ? finish() : console.error(`${checked} Faltan parámetros`);
+
+        // console.log(`Compra finalizada: ${checked}`);
+    });
+}
+
+function finish() {
+    localStorage.removeItem("market");
+    localStorage.removeItem("cart");
+    console.log("Fin del simulacro, se reinician los valores");
+}
+
+function checkInputContent(id) {
+    let field = document.getElementById(id);
+    if (field) {
+        field.value.length == 0 ? (field.style.border = "solid indianred") : (field.style.border = "");
+    }
+
+    if (field.style.border != "") {
+        return 1;
+    } else {
+        return 0;
+    }
+
+    // if (field.style.border == "") {
+    //     return 0;
+    // } else {
+    //     return 9;
+    // }
+
+    // field.style.border == "" ? return 9;
+
+    // return 0
+}

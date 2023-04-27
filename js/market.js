@@ -80,7 +80,6 @@ function addMarketCardbtnAddCart(array) {
             let quantityInput = document.getElementById(`quantity${newUnit.id}`);
             if (cartUnit) {
                 cartUnit.quantity += parseInt(quantityInput.value);
-                console.log(cartUnit.quantity);
                 cartUnit.calcTotal();
             } else {
                 addUnitToCart(newUnit, quantityInput.value);
@@ -145,7 +144,6 @@ function addMarketQuantityInput(array) {
                 } else if (inputQuantity.value < 0) {
                     inputQuantity.value = 0;
                 }
-                console.log(inputQuantity.value);
             });
         }
     });
@@ -166,7 +164,6 @@ function addMarketSearchInput(element) {
             selectCriteria1.style.border = "";
             let stringChain = inputSearch1.value.toUpperCase();
             let kbSwitchesFiltered = filterList(kbSwitchMarket, criterio, stringChain);
-            // console.log(kbSwitchesFiltered);
             const marketCardtContainer = document.getElementById("marketCardContainer");
             emptyElement(marketCardtContainer);
             setMarketItems(filterList(kbSwitchMarket, criterio, stringChain), marketCardtContainer);
