@@ -88,6 +88,31 @@ function addMarketCardbtnAddCart(array) {
             updateMarketItems(newUnit);
             saveStorage("market", kbSwitchMarket);
             saveStorage("cart", kbSwitchCart);
+
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `Se agregó ${newUnit.name}`,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener("mouseenter", Swal.stopTimer);
+                    toast.addEventListener("mouseleave", Swal.resumeTimer);
+                },
+            });
+
+            Toast.fire({
+                icon: "success",
+                title: `${newUnit.name} añadido al carrito`,
+            });
         });
     });
 }

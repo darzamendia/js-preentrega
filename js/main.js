@@ -10,4 +10,14 @@ window.onload = () => {
     }
     emptyElement(mainContainer);
     setHomeContainer(mainContainer);
+
+    // // put this right in your main.js file:
+    // var toast = new Toasty();
+
+    // // this show an informational message:
+    // toast.info("Here is some information!");
+
+    // Swal.fire({
+    //     title: "Genial!",
+    // });
 };
