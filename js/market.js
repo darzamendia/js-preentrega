@@ -78,6 +78,7 @@ function addMarketCardbtnAddCart(array) {
             let newUnit = buscarSwitch(kbSwitchMarket, "btnAddCart", e.target.id);
             let cartUnit = buscarSwitch(kbSwitchCart, "id", newUnit.id);
             let quantityInput = document.getElementById(`quantity${newUnit.id}`);
+        
             if (cartUnit) {
                 cartUnit.quantity += parseInt(quantityInput.value);
                 cartUnit.calcTotal();
