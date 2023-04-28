@@ -1,28 +1,13 @@
-let kbSwitchReviews = [];
-
-// const switchName = document.getElementById("inputSwitchName");
-// const switchType = document.getElementById("selectType");
-// const switchTopHousing = document.getElementById("selectTopHousing");
-// const switchBottomHousing = document.getElementById("selectBottomHousing");
-// const switchStem = document.getElementById("selectStem");
-// const switchSpring = document.getElementById("inputSpring");
-// const switchUrlImage = document.getElementById("inputUrlImage");
-// const switchRating = document.getElementById("selectRating");
-// const textAreaReview = document.getElementById("textAreaReview");
-// const btnAddSwitch = document.getElementById("btnAddSwitch");
-// const cardContainer = document.getElementById("cardContainer");
-// const checkFactoryLubed = document.getElementById("checkFactoryLubed");
-// const btnUploadDefault = document.getElementById("btnUploadDefault");
-// const btnClearList = document.getElementById("btnClearList");
-// const kbSwitchDetail = document.getElementById("kbSwitchDetail");
-// const selectCriteria = document.getElementById("selectCriteria");
-// const inputSearch = document.getElementById("inputSearch");
-
+function getJson(origin) {
+    return fetch(origin)
+        .then((response) => response.json())
+        .then((json) => json);
+}
 function newId(array) {
     let keep = true;
     let newIndex = 0;
     while (keep) {
-        newIndex = Math.floor(Math.random() * 9);
+        newIndex = Math.floor(Math.random() * 100);
         let set = array.find((kbSwitch) => kbSwitch.id == newIndex);
         if (!set) {
             keep = false;

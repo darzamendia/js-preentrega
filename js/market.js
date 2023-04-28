@@ -79,8 +79,6 @@ function addMarketCardbtnAddCart(array) {
             let cartUnit = buscarSwitch(kbSwitchCart, "id", newUnit.id);
             let quantityInput = document.getElementById(`quantity${newUnit.id}`);
 
-            console.log(`Insuficiente ${element.unitStock} - ${quantityInput.value}`);
-
             if (element.unitStock < quantityInput.value) {
                 console.log(`Insuficiente`);
                 return;
@@ -89,6 +87,7 @@ function addMarketCardbtnAddCart(array) {
             if (quantityInput.value == 0) {
                 return;
             }
+
 
             if (cartUnit) {
                 cartUnit.quantity += parseInt(quantityInput.value);
@@ -125,7 +124,6 @@ function addMarketCardbtnAddCart(array) {
                 icon: "success",
                 title: `${newUnit.name} añadido al carrito`,
             });
-
             quantityInput.value = 0;
         });
     });
@@ -218,6 +216,7 @@ function fillMarketList() {
     } else {
         defaultMarket();
     }
+
 }
 
 function uploadMarketStorage(array) {
@@ -245,89 +244,15 @@ function uploadMarketStorage(array) {
 }
 
 function defaultMarket() {
-    kbSwitchMarket.push(
-        new KbSwitchUnit(
-            "SP-Star Meteor White",
-            "Linear",
-            "Nylon",
-            "Nylon",
-            "POM",
-            "57",
-            true,
-            100.0,
-            30,
-            5,
-            "Su buen lubeado de fábrica hace que pueda usarse In-Stock sin necesidad de abrirlos",
-            "https://cdn.shopify.com/s/files/1/0275/3649/0561/products/sp-star-meteor-white-linear-switches-414631.jpg?v=1640142269"
-        )
-    );
-
-    kbSwitchMarket.push(
-        new KbSwitchUnit(
-            "Novelkeys Cream Linear",
-            "Linear",
-            "POM",
-            "POM",
-            "POM",
-            "55",
-            false,
-            220.0,
-            25,
-            5,
-            "Nuevo",
-            "https://cdn.shopify.com/s/files/1/0275/3649/0561/products/novelkeys-cream-linear-switches-709492.jpg?v=1671203961"
-        )
-    );
-    kbSwitchMarket.push(
-        new KbSwitchUnit(
-            "C³Equalz X TKC Tangerine",
-            "Linear",
-            "UHMWPE",
-            "UHMWPE",
-            "POM",
-            "62",
-            true,
-            240.0,
-            20,
-            5,
-            "Acidos como mandarina",
-            "https://cdn.shopify.com/s/files/1/0275/3649/0561/products/c3equalz-x-tkc-tangerine-linear-switches-145416.jpg?v=1634691412"
-        )
-    );
-    kbSwitchMarket.push(
-        new KbSwitchUnit(
-            "Geon Clear Tactile",
-            "Tactile",
-            "Policarbonato",
-            "Nylon",
-            "POM",
-            "60",
-            true,
-            260.0,
-            10,
-            5,
-            "",
-            "https://cdn.shopify.com/s/files/1/0275/3649/0561/products/geon-clear-tactile-switches-409943.webp?v=1676534404"
-        )
-    );
-    kbSwitchMarket.push(
-        new KbSwitchUnit(
-            "Gateron Yellow",
-            "Linear",
-            "PC/Nylon mix",
-            "Nylon",
-            "POM",
-            "55",
-            false,
-            280.0,
-            5,
-            5,
-            "",
-            "https://cdn.shopify.com/s/files/1/0275/3649/0561/products/gateron-yellow-linear-switches-951422.jpg?v=1636767870"
-        )
-    );
-
-    kbSwitchMarket.forEach((element) => {
-        element.assignId(kbSwitchMarket);
-    });
+    let defaultMarketJson = getJson("./assets/defaultMarket.json");
+    defaultMarketJson.then(array => {
+        array.forEach(s =>{
+            kbSwitchMarket.push( new KbSwitchUnit(s.name,s.type,s.topHousing,s.bottomHousing,s.stem,s.spring,s.factoryLubed,s.unitPrice,s.unitStock,s.rating,s.review,s.image)
+            )
+        })
+        kbSwitchMarket.forEach((element) => {
+            element.assignId(kbSwitchMarket);
+        });
+        saveStorage("market", kbSwitchMarket);
+    })
 }

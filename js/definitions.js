@@ -19,6 +19,10 @@ const btnLogoLavanda = document.getElementById("btnLogoLavanda");
 const btnLogoRojo = document.getElementById("btnLogoRojo");
 const btnLogoVerde = document.getElementById("btnLogoVerde");
 
+logos.push(new NewLogo(1, "btnLogoLavanda", "./img/logo-lavander.svg"));
+logos.push(new NewLogo(2, "btnLogoRojo", "./img/logo-red.svg"));
+logos.push(new NewLogo(3, "btnLogoVerde", "./img/logo-green.svg"));
+
 btnLogoLavanda.addEventListener("click", (e) => {
     e.preventDefault();
     let target = e.target;

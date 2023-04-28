@@ -171,134 +171,126 @@ function updateCartList(array, container) {
 function addCheckOut(container) {
     let newDiv = document.createElement("div");
     newDiv.innerHTML = `
-
     <div class="row g-5">
-                <div class="col-md-5 col-lg-4 order-md-last">
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-primary">Tu carrito</span>
-                        <span class="badge bg-primary rounded-pill" id="checkOutTotalItem"></span>
-                    </h4>
-                    <ul class="list-group mb-3" id="checkOutItemList">
-                    </ul>
-                </div>
-                <div class="col-md-7 col-lg-8">
-                    <h4 class="mb-3">Datos de facturación</h4>
-                    <form class="needs-validation" novalidate="">
-                        <div class="row g-3">
-                            <div class="col-sm-6">
-                                <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" placeholder="" value="" required="">
-                                <div class="invalid-feedback">
-                                    Valid first name is required.
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="apellido" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="apellido" placeholder="" value=""
-                                    required="">
-                                <div class="invalid-feedback">
-                                    Valid last name is required.
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <label for="email" class="form-label">Email <span
-                                        class="text-muted">(Opcional)</span></label>
-                                <input type="email" class="form-control" id="email" placeholder="correo@dominio.com">
-                                <div class="invalid-feedback">
-                                    Please enter a valid email address for shipping updates.
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <label for="domicilio" class="form-label">Domicilio</label>
-                                <input type="text" class="form-control" id="domicilio" placeholder="Ingresar..."
-                                    required="">
-                                <div class="invalid-feedback">
-                                    Please enter your shipping address.
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                            <div class="mb-3">
-                            <fieldset disabled>
-
-      <label for="'pais'" class="form-label">País</label>
-                                <select class="form-select" id="'pais'" required="">
-                                    <option value="">Argentina</option>
-                                </select>
-      </fieldset>
-
+    <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Tu carrito</span>
+            <span class="badge bg-primary rounded-pill" id="checkOutTotalItem"></span>
+        </h4>
+        <ul class="list-group mb-3" id="checkOutItemList">
+        </ul>
     </div>
-                                
-                                <div class="invalid-feedback">
-                                    Please select a valid 'pais'.
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="provincia" class="form-label">Provincia</label>
-                                <select class="form-select" id="provincia" required="">
-                                    <option value="">Ingresar...</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Please provide a valid provincia.
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="codigoPostal" class="form-label">Código Postal</label>
-                                <input type="text" class="form-control" id="codigoPostal" placeholder="" required="">
-                                <div class="invalid-feedback">
-                                    Zip code required.
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="my-4">
-                        <h4 class="mb-3">Forma de pago</h4>
-                        <div class="my-3">
-                            <div class="form-check">
-                                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked=""
-                                    required="">
-                                <label class="form-check-label" for="credit">Tarjeta de crédito</label>
-                            </div>
-                            <div class="form-check">
-                                <input id="debit" name="paymentMethod" type="radio" class="form-check-input"
-                                    required="">
-                                <label class="form-check-label" for="debit">Tarjeta de débito</label>
-                            </div>
-                        </div>
-                        <div class="row gy-3">
-                            <div class="col-md-6">
-                                <label for="cc-name" class="form-label">Nombre Tarjeta</label>
-                                <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-                                <small class="text-muted">Como aparece en la tarjeta</small>
-                                <div class="invalid-feedback">
-                                    Name on card is required
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="cc-number" class="form-label">Numero de tarjeta</label>
-                                <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-                                <div class="invalid-feedback">
-                                    Credit card number is required
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="cc-expiration" class="form-label">Vencimiento</label>
-                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-                                <div class="invalid-feedback">
-                                    Expiration date required
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="cc-cvv" class="form-label">CCV</label>
-                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-                                <div class="invalid-feedback">
-                                    Security code required
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="my-4">
-                        <button class="w-100 btn btn-outline-dark btn-lg" id="btnPayment" type="submit">Confirmar pago</button>
-                    </form>
+    <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Datos de facturación</h4>
+        <form class="needs-validation" novalidate="">
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Valid first name is required.
+                    </div>
                 </div>
-            </div>`;
+                <div class="col-sm-6">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="apellido" placeholder="" value="" required="">
+                    <div class="invalid-feedback">
+                        Valid last name is required.
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label for="email" class="form-label">Email <span class="text-muted">(Opcional)</span></label>
+                    <input type="email" class="form-control" id="email" placeholder="correo@dominio.com">
+                    <div class="invalid-feedback">
+                        Please enter a valid email address for shipping updates.
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label for="domicilio" class="form-label">Domicilio</label>
+                    <input type="text" class="form-control" id="domicilio" placeholder="Ingresar..." required="">
+                    <div class="invalid-feedback">
+                        Please enter your shipping address.
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="mb-3">
+                        <fieldset disabled>
+                            <label for="'pais'" class="form-label">País</label>
+                            <select class="form-select" id="'pais'" required="">
+                                <option value="">Argentina</option>
+                            </select>
+                        </fieldset>
+                    </div>
+                    <div class="invalid-feedback">
+                        Please select a valid 'pais'.
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="provincia" class="form-label">Provincia</label>
+                    <select class="form-select" id="provincia" required="">
+                        <option value="">Ingresar...</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please provide a valid provincia.
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="codigoPostal" class="form-label">Código Postal</label>
+                    <input type="text" class="form-control" id="codigoPostal" placeholder="" required="">
+                    <div class="invalid-feedback">
+                        Zip code required.
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <h4 class="mb-3">Forma de pago</h4>
+            <div class="my-3">
+                <div class="form-check">
+                    <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked=""
+                        required="">
+                    <label class="form-check-label" for="credit">Tarjeta de crédito</label>
+                </div>
+                <div class="form-check">
+                    <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="">
+                    <label class="form-check-label" for="debit">Tarjeta de débito</label>
+                </div>
+            </div>
+            <div class="row gy-3">
+                <div class="col-md-6">
+                    <label for="cc-name" class="form-label">Nombre Tarjeta</label>
+                    <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+                    <small class="text-muted">Como aparece en la tarjeta</small>
+                    <div class="invalid-feedback">
+                        Name on card is required
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="cc-number" class="form-label">Numero de tarjeta</label>
+                    <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+                    <div class="invalid-feedback">
+                        Credit card number is required
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="cc-expiration" class="form-label">Vencimiento</label>
+                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
+                    <div class="invalid-feedback">
+                        Expiration date required
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="cc-cvv" class="form-label">CCV</label>
+                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
+                    <div class="invalid-feedback">
+                        Security code required
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <button class="w-100 btn btn-outline-dark btn-lg" id="btnPayment" type="submit">Confirmar pago</button>
+        </form>
+    </div>
+</div>`;
     container.append(newDiv);
     addCheckOutTotal(kbSwitchCart);
     addProvincesDropdown("provincia");
@@ -338,7 +330,9 @@ function addCheckOutItems(array) {
 
 function addProvincesDropdown(containerId) {
     let provinceCnt = document.getElementById(containerId);
-    const provincesPromise = getProvinces();
+    
+    // const provincesPromise = getProvinces();
+    const provincesPromise = getJson("https://apis.datos.gob.ar/georef/api/provincias");;
     provincesPromise.then((promise) => {
         promise.provincias.sort((a, b) => a.id - b.id);
         promise.provincias.forEach((element) => {
@@ -350,14 +344,24 @@ function addProvincesDropdown(containerId) {
     });
 }
 
-function getProvinces() {
-    return fetch("https://apis.datos.gob.ar/georef/api/provincias")
-        .then((response) => response.json())
-        .then((json) => json);
-}
-
 function addCheckoutFn() {
     addPaymentBtn();
+    addCheckInputNum("cc-number", 16);
+    addCheckInputNum("cc-expiration", 4);
+    addCheckInputNum("cc-cvv", 3);
+    addCheckInputNum("codigoPostal", 5);
+}
+
+function addCheckInputNum(id, lengthLimit){
+    const element = document.getElementById(id);
+    element.addEventListener("input", (e) => {
+        if (isNaN(e.data) || element.value.length > lengthLimit ){
+            element.value = element.value.slice(0, element.value.length - 1);
+        }
+
+        element.value.length == lengthLimit ? (element.style.border = "solid #038857") : (element.style.border = "");
+
+    })
 }
 
 function addPaymentBtn() {
@@ -366,15 +370,15 @@ function addPaymentBtn() {
     btnPayment.addEventListener("click", (e) => {
         checked = 0;
         e.preventDefault();
-        checked += checkInputContent("nombre");
-        checked += checkInputContent("apellido");
-        checked += checkInputContent("domicilio");
-        checked += checkInputContent("provincia");
-        checked += checkInputContent("codigoPostal");
-        checked += checkInputContent("cc-name");
-        checked += checkInputContent("cc-number");
-        checked += checkInputContent("cc-expiration");
-        checked += checkInputContent("cc-cvv");
+        checked += checkInputContent("nombre", 0);
+        checked += checkInputContent("apellido", 0);
+        checked += checkInputContent("domicilio", 0);
+        checked += checkInputContent("provincia", 0);
+        checked += checkInputContent("codigoPostal", 0);
+        checked += checkInputContent("cc-name", 0);
+        checked += checkInputContent("cc-number", 16);
+        checked += checkInputContent("cc-expiration", 4);
+        checked += checkInputContent("cc-cvv", 3);
         checked == 0 ? finish() : console.error(`${checked} Faltan parámetros`);
     });
 }
@@ -382,6 +386,7 @@ function addPaymentBtn() {
 function finish() {
     localStorage.removeItem("market");
     localStorage.removeItem("cart");
+    fillMarketList();
     endNotification();
     console.log("Fin del simulacro, se reinician los valores");
 }
@@ -413,11 +418,20 @@ function endNotification() {
     });
 }
 
-function checkInputContent(id) {
+function checkInputContent(id, lengthLimit) {
     let field = document.getElementById(id);
     if (field) {
         field.value.length == 0 ? (field.style.border = "solid indianred") : (field.style.border = "");
     }
+    // if (lengthLimit != 0 && lengthLimit < field.value.length ){
+    //     field.style.border = "solid indianred"
+    // } elseif {
+    //     (field.style.border = "")
+    // } 
+
+    if (lengthLimit != 0){
+        field.value.length < lengthLimit ? (field.style.border = "solid indianred") : (field.style.border = "");
+    }  
 
     if (field.style.border != "") {
         return 1;
