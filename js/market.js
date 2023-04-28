@@ -78,7 +78,18 @@ function addMarketCardbtnAddCart(array) {
             let newUnit = buscarSwitch(kbSwitchMarket, "btnAddCart", e.target.id);
             let cartUnit = buscarSwitch(kbSwitchCart, "id", newUnit.id);
             let quantityInput = document.getElementById(`quantity${newUnit.id}`);
-        
+
+            console.log(`Insuficiente ${element.unitStock} - ${quantityInput.value}`);
+
+            if (element.unitStock < quantityInput.value) {
+                console.log(`Insuficiente`);
+                return;
+            }
+            // console.log(`Cantidad del elemento: ${element.quantity}`);
+            if (quantityInput.value == 0) {
+                return;
+            }
+
             if (cartUnit) {
                 cartUnit.quantity += parseInt(quantityInput.value);
                 cartUnit.calcTotal();
@@ -114,6 +125,8 @@ function addMarketCardbtnAddCart(array) {
                 icon: "success",
                 title: `${newUnit.name} añadido al carrito`,
             });
+
+            quantityInput.value = 0;
         });
     });
 }

@@ -82,6 +82,7 @@ function addInitBuyFn(container) {
     const buyBtn = document.getElementById("btnInitBuy");
     if (buyBtn) {
         buyBtn.addEventListener("click", (e) => {
+            emptyElement(container);
             e.preventDefault();
             addCheckOut(container);
         });
@@ -93,23 +94,71 @@ function addCartCardBtnDelete(array) {
         const btnDeleteCartItem = document.getElementById(element.idDelete);
         btnDeleteCartItem.addEventListener("click", (e) => {
             e.preventDefault();
+
             let selectedUnit = buscarSwitch(kbSwitchCart, "idDelete", e.target.id);
             let marketUnit = buscarSwitch(kbSwitchMarket, "id", selectedUnit.id);
-            marketUnit.unitStock += selectedUnit.quantity;
-            const newArray = kbSwitchCart.filter((kbSwitch) => {
-                return kbSwitch.idDelete !== selectedUnit.idDelete;
+            console.log(e.target.id);
+            console.log(kbSwitchCart);
+            console.log(kbSwitchMarket);
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger",
+                },
+                buttonsStyling: false,
             });
-            kbSwitchCart = newArray;
-            if (kbSwitchCart.length != 0) {
-                let cartListCnt = document.getElementById("cartList");
-                emptyElement(cartList);
-                updateCartList(kbSwitchCart, cartList);
-            } else {
-                emptyElement(mainContainer);
-                emptyCartImg(mainContainer, "./img/emptycart.svg");
-            }
-            saveStorage("market", kbSwitchMarket);
-            saveStorage("cart", kbSwitchCart);
+            // Swal.fire({
+            swalWithBootstrapButtons
+                .fire({
+                    title: "Eliminar item",
+                    text: `Está seguro que desea eliminar ${selectedUnit.name} del carrito?`,
+                    // icon: "warning",
+                    // icon: "warning",
+                    showCancelButton: true,
+                    // confirmButtonColor: "#3085d6",
+                    // cancelButtonColor: "#d33",
+                    cancelButtonText: "No, cancelar",
+                    confirmButtonText: "Si, eliminar",
+                    reverseButtons: true,
+                })
+                .then((result) => {
+                    console.log("test");
+                    if (result.isConfirmed) {
+                        Swal.fire("Eliminado!", "El item seleccionado fué descartado del carrito", "success");
+                        marketUnit.unitStock += selectedUnit.quantity;
+                        const newArray = kbSwitchCart.filter((kbSwitch) => {
+                            return kbSwitch.idDelete !== selectedUnit.idDelete;
+                        });
+                        kbSwitchCart = newArray;
+                        if (kbSwitchCart.length != 0) {
+                            let cartListCnt = document.getElementById("cartList");
+                            emptyElement(cartList);
+                            updateCartList(kbSwitchCart, cartList);
+                        } else {
+                            emptyElement(mainContainer);
+                            emptyCartImg(mainContainer, "./img/emptycart.svg");
+                        }
+                        saveStorage("market", kbSwitchMarket);
+                        saveStorage("cart", kbSwitchCart);
+                    }
+                });
+
+            // marketUnit.unitStock += selectedUnit.quantity;
+            // const newArray = kbSwitchCart.filter((kbSwitch) => {
+            //     return kbSwitch.idDelete !== selectedUnit.idDelete;
+            // });
+            // kbSwitchCart = newArray;
+            // if (kbSwitchCart.length != 0) {
+            //     let cartListCnt = document.getElementById("cartList");
+            //     emptyElement(cartList);
+            //     updateCartList(kbSwitchCart, cartList);
+            // } else {
+            //     emptyElement(mainContainer);
+            //     emptyCartImg(mainContainer, "./img/emptycart.svg");
+            // }
+            // saveStorage("market", kbSwitchMarket);
+            // saveStorage("cart", kbSwitchCart);
         });
     });
 }
@@ -301,16 +350,6 @@ function addProvincesDropdown(containerId) {
     });
 }
 
-// function addProvinces(container, promise) {
-//     if (container) {
-//         promise.then(() => {
-//             promise.provincias.forEach((provincia) => {
-//                 console.log(provincia.nombre);
-//             });
-//         });
-//     }
-// }
-
 function getProvinces() {
     return fetch("https://apis.datos.gob.ar/georef/api/provincias")
         .then((response) => response.json())
@@ -319,7 +358,6 @@ function getProvinces() {
 
 function addCheckoutFn() {
     addPaymentBtn();
-    // let inputName = document.getElementById("nombre");
 }
 
 function addPaymentBtn() {
@@ -338,15 +376,41 @@ function addPaymentBtn() {
         checked += checkInputContent("cc-expiration");
         checked += checkInputContent("cc-cvv");
         checked == 0 ? finish() : console.error(`${checked} Faltan parámetros`);
-
-        // console.log(`Compra finalizada: ${checked}`);
     });
 }
 
 function finish() {
     localStorage.removeItem("market");
     localStorage.removeItem("cart");
+    endNotification();
     console.log("Fin del simulacro, se reinician los valores");
+}
+
+function endNotification() {
+    let timerInterval;
+    Swal.fire({
+        title: "Tu compra ha sido realizada!",
+        html: "El simulador se reiniciará en <b></b> segundos.",
+        timer: 5000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading();
+            const b = Swal.getHtmlContainer().querySelector("b");
+            b.textContent = 5;
+            timerInterval = setInterval(() => {
+                b.textContent--;
+            }, 1000);
+        },
+        willClose: () => {
+            clearInterval(timerInterval);
+        },
+    }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+            console.log("I was closed by the timer");
+        }
+        emptyElement(mainContainer);
+        setHomeContainer(mainContainer);
+    });
 }
 
 function checkInputContent(id) {
@@ -360,14 +424,4 @@ function checkInputContent(id) {
     } else {
         return 0;
     }
-
-    // if (field.style.border == "") {
-    //     return 0;
-    // } else {
-    //     return 9;
-    // }
-
-    // field.style.border == "" ? return 9;
-
-    // return 0
 }
