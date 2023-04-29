@@ -7,7 +7,7 @@
         "stem": "POM",
         "spring": "57",
         "factoryLubed": true,
-        "unitPrice": 100.0,
+        "unitPrice": 231.0,
         "unitStock": 100,
         "rating": 5,
         "review": "Su buen lubeado de fábrica hace que pueda usarse In-Stock sin necesidad de abrirlos",
@@ -21,10 +21,10 @@
         "stem": "POM",
         "spring": "55",
         "factoryLubed": false,
-        "unitPrice": 220.0,
+        "unitPrice": 241.0,
         "unitStock": 100,
-        "rating": 5,
-        "review": "Nuevo",
+        "rating": 4,
+        "review": "El exitoso switch vuelve una vez mas en su R2",
         "image": "https://cdn.shopify.com/s/files/1/0275/3649/0561/products/novelkeys-cream-linear-switches-709492.jpg?v=1671203961"
     },
     {
@@ -35,10 +35,10 @@
         "stem": "POM",
         "spring": "62",
         "factoryLubed": true,
-        "unitPrice": 240.0,
+        "unitPrice": 189.0,
         "unitStock": 100,
         "rating": 5,
-        "review": "Acidos como mandarina",
+        "review": "Acidos como mandarina, scratchy al comienzo",
         "image": "https://cdn.shopify.com/s/files/1/0275/3649/0561/products/c3equalz-x-tkc-tangerine-linear-switches-145416.jpg?v=1634691412"
     },
     {
@@ -51,8 +51,8 @@
         "factoryLubed": true,
         "unitPrice": 260.0,
         "unitStock": 100,
-        "rating": 5,
-        "review": "",
+        "rating": 2,
+        "review": "No se ha cargado review del switch",
         "image": "https://cdn.shopify.com/s/files/1/0275/3649/0561/products/geon-clear-tactile-switches-409943.webp?v=1676534404"
     },
     {
@@ -66,7 +66,7 @@
         "unitPrice": 280.0,
         "unitStock": 100,
         "rating": 5,
-        "review": "",
+        "review": "El clásico, nunca falla",
         "image": "https://cdn.shopify.com/s/files/1/0275/3649/0561/products/gateron-yellow-linear-switches-951422.jpg?v=1636767870"
     },
     {
@@ -77,13 +77,13 @@
         "stem": "POM",
         "spring": "67",
         "factoryLubed": true,
-        "unitPrice": 100.0,
+        "unitPrice": 384.0,
         "unitStock": 100,
-        "rating": 5,
+        "rating": 4,
         "review": "Otro switch frutal de la mano de C³Equalz",
         "image": "https://cdn.shopify.com/s/files/1/0275/3649/0561/products/c3equalz-x-tkc-kiwi-tactile-switches-531629.jpg?v=1629413711"
     },
-    {  
+    {
         "name": "TKC Blackberry",
         "type": "Clicky",
         "topHousing": "UHMWPE",
@@ -91,13 +91,13 @@
         "stem": "POM",
         "spring": "72",
         "factoryLubed": true,
-        "unitPrice": 199.0,
+        "unitPrice": 138.0,
         "unitStock": 100,
         "rating": 5,
-        "review": "",
+        "review": "Una nueva apuesta de TKC, utiliza el material UHMWPE para todo el housing",
         "image": "https://cdn.shopify.com/s/files/1/0275/3649/0561/products/tkc-blackberry-clicky-switches-118578.webp?v=1677830435"
     },
-    { 
+    {
         "name": "Durock Shrimp",
         "type": "Silent tactile",
         "topHousing": "Policarbonato",
@@ -105,13 +105,13 @@
         "stem": "POM",
         "spring": "67",
         "factoryLubed": true,
-        "unitPrice": 199.0,
+        "unitPrice": 213.0,
         "unitStock": 100,
-        "rating": 5,
-        "review": "",
+        "rating": 3,
+        "review": "Mush mush, los silent son lineales acolchonados",
         "image": "https://cdn.shopify.com/s/files/1/0275/3649/0561/products/durock-shrimp-silent-tactile-switches-209164.jpg?v=1627467004"
     },
-    {  
+    {
         "name": "Jwick Semi-Silent",
         "type": "Linear",
         "topHousing": "Policarbonato",
@@ -133,7 +133,7 @@
         "stem": "POM",
         "spring": "55",
         "factoryLubed": false,
-        "unitPrice": 558.3,
+        "unitPrice": 238.0,
         "unitStock": 100,
         "rating": 5,
         "review": "Vuelven los pandas, esta vez por Tecsee. Calidad y estética inconfundibles",
