@@ -78,17 +78,12 @@ function addMarketCardbtnAddCart(array) {
             let newUnit = buscarSwitch(kbSwitchMarket, "btnAddCart", e.target.id);
             let cartUnit = buscarSwitch(kbSwitchCart, "id", newUnit.id);
             let quantityInput = document.getElementById(`quantity${newUnit.id}`);
-
             if (element.unitStock < quantityInput.value) {
-                console.log(`Insuficiente`);
                 return;
             }
-            // console.log(`Cantidad del elemento: ${element.quantity}`);
             if (quantityInput.value == 0) {
                 return;
             }
-
-
             if (cartUnit) {
                 cartUnit.quantity += parseInt(quantityInput.value);
                 cartUnit.calcTotal();
@@ -99,7 +94,6 @@ function addMarketCardbtnAddCart(array) {
             updateMarketItems(newUnit);
             saveStorage("market", kbSwitchMarket);
             saveStorage("cart", kbSwitchCart);
-
             Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -107,7 +101,6 @@ function addMarketCardbtnAddCart(array) {
                 showConfirmButton: false,
                 timer: 1500,
             });
-
             const Toast = Swal.mixin({
                 toast: true,
                 position: "top-end",
@@ -119,7 +112,6 @@ function addMarketCardbtnAddCart(array) {
                     toast.addEventListener("mouseleave", Swal.resumeTimer);
                 },
             });
-
             Toast.fire({
                 icon: "success",
                 title: `${newUnit.name} añadido al carrito`,
@@ -216,7 +208,6 @@ function fillMarketList() {
     } else {
         defaultMarket();
     }
-
 }
 
 function uploadMarketStorage(array) {
@@ -245,14 +236,28 @@ function uploadMarketStorage(array) {
 
 function defaultMarket() {
     let defaultMarketJson = getJson("./assets/defaultMarket.json");
-    defaultMarketJson.then(array => {
-        array.forEach(s =>{
-            kbSwitchMarket.push( new KbSwitchUnit(s.name,s.type,s.topHousing,s.bottomHousing,s.stem,s.spring,s.factoryLubed,s.unitPrice,s.unitStock,s.rating,s.review,s.image)
-            )
-        })
+    defaultMarketJson.then((array) => {
+        array.forEach((s) => {
+            kbSwitchMarket.push(
+                new KbSwitchUnit(
+                    s.name,
+                    s.type,
+                    s.topHousing,
+                    s.bottomHousing,
+                    s.stem,
+                    s.spring,
+                    s.factoryLubed,
+                    s.unitPrice,
+                    s.unitStock,
+                    s.rating,
+                    s.review,
+                    s.image
+                )
+            );
+        });
         kbSwitchMarket.forEach((element) => {
             element.assignId(kbSwitchMarket);
         });
         saveStorage("market", kbSwitchMarket);
-    })
+    });
 }

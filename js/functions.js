@@ -28,15 +28,12 @@ function registrarSwitch() {
         textAreaReview.value,
         switchUrlImage.value
     );
-
     if (textAreaReview.value.length != 0) {
         kbSwitch.addReview(textAreaReview.value);
     } else {
         kbSwitch.addReview("No ingresó review");
     }
-
     kbSwitch.assignImage(switchUrlImage.value);
-
     kbSwitchReviews.push(kbSwitch);
     kbSwitch.assignId(kbSwitchReviews);
 }
@@ -57,21 +54,9 @@ function addUnitToCart(newUnit, quantity) {
         newUnit.image,
         newUnit.id
     );
-
-    // if (textAreaReview.value.length != 0) {
-    //     kbSwitch.addReview(textAreaReview.value);
-    // } else {
-    //     kbSwitch.addReview("No ingresó review");
-    // }
-    // console.log(`${kbSwitch.unitPrice} ${kbSwitch.quantity}`);
     kbSwitch.calcTotal();
     kbSwitch.assignId();
-    // console.log(kbSwitch.totalPrice);
-    // kbSwitch.assignImage(switchUrlImage.value);
-
     kbSwitchCart.push(kbSwitch);
-    // console.log()
-    // kbSwitch.assignId(kbSwitchReviews);
 }
 
 function saveStorage(key, array) {
@@ -143,150 +128,13 @@ function createDetailContainer(kbSwitch, containerHtml) {
                 <a href="#mainContainer" class="btn btn-outline-dark btn-sm my-2">Volver</a>
             </div>
         </div>`;
-    // <div class="d-grid col-4 mx-auto">
-    //     <a href="#cardContainer" class="btn btn-outline-dark btn-sm my-2" id="btnBackToCardContainer">
-    //         Volver
-    //     </a>
-    // </div>;
     containerHtml.append(divCard);
 }
-
-function clearCardContainer(containerHtml) {
-    containerHtml.innerHTML = "";
-}
-
-// btnAddSwitch.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     let valido = valInputs();
-//     if (valido) {
-//         registrarSwitch(kbSwitchReviews);
-//         saveStorage(kbSwitchReviews);
-//         createCard(kbSwitchReviews, cardContainer);
-//         clearInputs();
-//     }
-// });
-
-// function clearInputs() {
-//     switchName.value = "";
-//     switchType.value = "Seleccionar tipo...";
-//     switchTopHousing.value = "Seleccionar material...";
-//     switchBottomHousing.value = "Seleccionar material...";
-//     switchStem.value = "Seleccionar material...";
-//     switchSpring.value = "";
-//     checkFactoryLubed.checked = false;
-//     switchUrlImage.value = "";
-//     textAreaReview.value = "";
-//     switchRating.value = "Puntuación...";
-// }
-
-// function valInputs() {
-//     let inputsOk = true;
-//     if (switchName.value == "") {
-//         switchName.style.border = "solid indianred";
-//         inputsOk = false;
-//         backToContainer("cardContainer");
-//     } else {
-//         switchName.style.border = "";
-//     }
-//     if (switchType.value == "Seleccionar tipo...") {
-//         switchType.style.border = "solid indianred";
-//         inputsOk = false;
-//         backToContainer("cardContainer");
-//     } else {
-//         switchType.style.border = "";
-//     }
-//     if (switchTopHousing.value == "Seleccionar material...") {
-//         switchTopHousing.style.border = "solid indianred";
-//         inputsOk = false;
-//         backToContainer("cardContainer");
-//     } else {
-//         switchTopHousing.style.border = "";
-//     }
-//     if (switchBottomHousing.value == "Seleccionar material...") {
-//         switchBottomHousing.style.border = "solid indianred";
-//         inputsOk = false;
-//         backToContainer("cardContainer");
-//     } else {
-//         switchBottomHousing.style.border = "";
-//     }
-//     if (switchStem.value == "Seleccionar material...") {
-//         switchStem.style.border = "solid indianred";
-//         inputsOk = false;
-//         backToContainer("cardContainer");
-//     } else {
-//         switchStem.style.border = "";
-//     }
-//     if (switchSpring.value == "" || isNaN(switchSpring.value)) {
-//         switchSpring.style.border = "solid indianred";
-//         inputsOk = false;
-//         backToContainer("cardContainer");
-//     } else {
-//         switchSpring.style.border = "";
-//     }
-//     return inputsOk;
-// }
 
 function backToContainer(container) {
     document.getElementById(container).scrollIntoView();
 }
-// "cardContainer"
-
-// btnUploadDefault.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     registrarSwitchDefault(kbSwitchReviews);
-//     saveStorage(kbSwitchReviews);
-//     createCard(kbSwitchReviews, cardContainer);
-// });
-
-// btnClearList.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     clearCardContainer(cardContainer);
-//     clearStorage();
-//     const containerFound = document.getElementById("kbSwitchDetail");
-//     if (containerFound) {
-//         containerFound.innerHTML = "";
-//     }
-// });
-
-// inputSearch.addEventListener("input", () => {
-//     let criterio = selectCriteria.value;
-//     if (criterio == "Filtrar listado...") {
-//         selectCriteria.style.border = "solid indianred";
-//         inputSearch.value = "";
-//     } else {
-//         selectCriteria.style.border = "";
-//         let chain = inputSearch.value.toUpperCase();
-//         let kbSwitchesFiltered = filterList(kbSwitchReviews, criterio, chain);
-//         createCard(filterList(kbSwitchReviews, criterio, chain), cardContainer);
-//     }
-// });
-
 const defaultSwitchList = [];
-
-function registrarSwitchDefault() {
-    for (const defSwitch of defaultSwitchList) {
-        const kbSwitch = new KbSwitch(
-            defSwitch.name,
-            defSwitch.type,
-            defSwitch.topHousing,
-            defSwitch.bottomHousing,
-            defSwitch.stem,
-            defSwitch.spring,
-            defSwitch.factoryLubed,
-            defSwitch.rating,
-            defSwitch.review,
-            defSwitch.image
-        );
-        if (defSwitch.review.length != 0) {
-            kbSwitch.addReview(defSwitch.review);
-        } else {
-            kbSwitch.addReview("No ingresó review");
-        }
-        kbSwitch.assignImage(defSwitch.image);
-        kbSwitchReviews.push(kbSwitch);
-        kbSwitch.assignId(kbSwitchReviews);
-    }
-}
 
 function buscarSwitch(array, criterio, input) {
     return array.find((element) => element[criterio] == input);

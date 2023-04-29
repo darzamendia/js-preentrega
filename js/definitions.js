@@ -34,8 +34,6 @@ btnLogoLavanda.addEventListener("click", (e) => {
     if (objectFound) {
         objectFound.style.background = "#B6A4FE";
     }
-    // btnAddSwitch.style.background = "#B6A4FE";
-    // btnAddSwitch.style.border = "#B6A4FE";
 });
 
 btnLogoRojo.addEventListener("click", (e) => {
@@ -49,8 +47,6 @@ btnLogoRojo.addEventListener("click", (e) => {
     if (objectFound) {
         objectFound.style.background = "#FF6262";
     }
-    // btnAddSwitch.style.background = "#FF6262";
-    // btnAddSwitch.style.border = "#FF6262";
 });
 
 btnLogoVerde.addEventListener("click", (e) => {
@@ -64,11 +60,8 @@ btnLogoVerde.addEventListener("click", (e) => {
     if (objectFound) {
         objectFound.style.background = "#7DBF91";
     }
-    // btnAddSwitch.style.background = "#7DBF91";
-    // btnAddSwitch.style.border = "#7DBF91";
 });
 
-// new
 btnNavHome.addEventListener("click", (e) => {
     e.preventDefault();
     emptyElement(mainContainer);
